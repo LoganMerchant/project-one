@@ -1,6 +1,5 @@
 
-    var api = 'https://newsapi.org/v2/top-headlines?country=us
-       &apiKey=7aa4007d232b4971be8c8b229d1ca299'
+    var api = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=7aa4007d232b4971be8c8b229d1ca299'
 
     fetch(api)
     .then(function (response) {
