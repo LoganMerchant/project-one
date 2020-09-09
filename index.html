@@ -4,25 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squiggle Brackets</title>
+    <!-- metro cdn -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css">
+    <!-- unique stylesheet -->
     <link rel="stylesheet" href="./assets/style.css" />
-    <!-- bootstrap just in case! -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
 </head>
 <body>
-    <h1>What Music is the news telling you to listen too?</h1>
+    <header>
+      <!-- PLACEHOLDER -->
+      <img src="https://www.webfx.com/blog/images/cdn.designinstruct.com/files/582-how-to-image-placeholders/generic-image-placeholder.png">
+      <h1>Project One, Oh So Fun</h1>
+    </header>
     
-    <div>
-      Genre:
-      <select name="genre-selector" id="rating">
-        <option value="Reggae">Reggae</option>
-        <option value="Rock">Rock</option>
-        <option value="Pop">Pop</option>
-        <option value="Country">Country</option>
-      </select>
-      <button onclick="myFunction()">Search!</button>
-    <div id="response-header"></div>
-    <div id="response-container"></div>
+    <!-- Search form, open to work -->
+    <form>
+      <div class="form-group">
+        <label>What will you be searching for today?</label>
+        <input id="search-term" type="text" placeholder="SEARCH HERE" />
+        <select id="search-type">
+            <option value="Music">in Music</option>
+            <option value="Recipes">in Recipes</option>
+            <option value="Wikipedia">in Wikipedia</option>
+        </select>
+        <button id="search-btn" type="submit">Search!</button>
+      </div>
+    </form>
+
+    <!-- Search Results List -->
+    <ul data-role="listview">
+      <!-- PLACEHOLDERS -->
+      <li>ITEM 1</li>
+      <li>ITEM 2</li>
+    </ul>
+
+    <div id="selected-result"></div>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
     
