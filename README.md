@@ -1,6 +1,6 @@
 # (Project Title Placeholder)
 
-## Languages Used
+## Languages, Libraries, and APIs Used
 * HTML/CSS
 * JavaScript
 * jQuery
