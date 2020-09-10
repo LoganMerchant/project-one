@@ -20,8 +20,8 @@
     background: linear-gradient(-45deg, blue, maroon, darkorange, darkgreen);
     background-size: 400% 400%;
     position: relative;
-    animation: change 10s ease-in-out infinite;
-}
+    animation: change 10s ease-in-out infinite; */
+ }
 .container{
     font-size: 5rem;
     text-transform: uppercase;
