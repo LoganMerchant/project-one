@@ -252,10 +252,22 @@ var countryCodesObj = {
     "MZ": "Mozambique"
 };
 
+// Transforms the user's input into a country code
 var getCountryCode = function(searchedCountry) {
+    // Splits the country into an array based on it's white space
+    var formattedCountry = searchedCountry.toLowerCase().split(" ");
+
+    for (var i = 0; i < formattedCountry.length; i++) {
+        // For each word(index), capitalize the first letter and keep the rest as lowercase
+        formattedCountry[i] = formattedCountry[i].charAt(0).toUpperCase() + formattedCountry[i].substring(1);
+    }
+
+    // Joins each of the indexes together and puts whitespace between them
+    formattedCountry = formattedCountry.join(" ");
+
     // Look over the countryCodesObj keys, find the one that matches the searchedCountry, and return it.
     return Object.keys(countryCodesObj).find(function(key) {
-        return countryCodesObj[key] === searchedCountry;
+        return countryCodesObj[key] === formattedCountry;
     });
 };
 
