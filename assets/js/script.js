@@ -1,4 +1,5 @@
-countryCodesObj = {
+// Used to convert a user's search into a country code.
+var countryCodesObj = {
     "BD": "Bangladesh",
     "BE": "Belgium",
     "BF": "Burkina Faso",
@@ -251,24 +252,31 @@ countryCodesObj = {
     "MZ": "Mozambique"
 };
 
+// !!!! MUST BE DONE BEFORE RESULTS ARE SHOWN !!!!
+// Asks user to authorize this application
 var spotifyUserAuthorization = function() {
-    authorizeUri = 'https://accounts.spotify.com/authorize?client_id=c3f150a666754143adc77d0704da8ebf&response_type=token&redirect_uri=https://loganmerchant.github.io/password-generator/';
-
+    authorizeUri = 'https://accounts.spotify.com/authorize?client_id=c3f150a666754143adc77d0704da8ebf&response_type=token' +
+    // !!!! THIS URI REDIRECT NEEDS TO CHANGE TO THE DEPLOYED APPLICATION !!!!
+    '&redirect_uri=https://loganmerchant.github.io/password-generator/';
     location.replace(authorizeUri);
 };
 
+// Fetches the top playlists for a given country.
 var fetchPlaylist = function(searchCountry) {
     var token = document.location.hash.split("=")[1].split("&")[0];
-    var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country" + searchCountry;
+    var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country=" + searchCountry;
     
     fetch(searchUri, {
+        // Provides the temporary authorization token in the request
         headers: {
             'Authorization': "Bearer " + token,
         }
     })
+    // Formats the response in JSON
     .then(function(response) {
         return response.json();
     })
+    // console.logs the data JSONified data
     .then(function(data) {
         console.log(data);
     })
