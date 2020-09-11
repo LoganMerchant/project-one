@@ -252,6 +252,14 @@ var countryCodesObj = {
     "MZ": "Mozambique"
 };
 
+var getCountryCode = function(searchedCountry) {
+    // Look over the countryCodesObj keys, find the one that matches the searchedCountry, and return it.
+    return Object.keys(countryCodesObj).find(function(key) {
+        return countryCodesObj[key] === searchedCountry;
+    });
+};
+
+
 // !!!! MUST BE DONE BEFORE RESULTS ARE SHOWN !!!!
 // Asks user to authorize this application
 var spotifyUserAuthorization = function() {
@@ -262,9 +270,9 @@ var spotifyUserAuthorization = function() {
 };
 
 // Fetches the top playlists for a given country.
-var fetchPlaylist = function(searchCountry) {
+var fetchPlaylist = function(searchedCountry) {
     var token = document.location.hash.split("=")[1].split("&")[0];
-    var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country=" + searchCountry;
+    var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country=" + searchedCountry;
     
     fetch(searchUri, {
         // Provides the temporary authorization token in the request
