@@ -34,7 +34,8 @@
     font-size: 5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    padding: 10rem 10rem;
+    padding: 40px 20px;
+    margin: 20px;
 }
 
 @keyframes change {

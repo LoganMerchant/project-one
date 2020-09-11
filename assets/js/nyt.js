@@ -2,6 +2,7 @@ var button = $(".btn");
 var newsSearch = $(".form-control").val();
 var list = JSON.parse(localStorage.getItem("headlines")) || [];
 var key = `pZwZYOOhZZTfRVT0WHKsRuANSpS6D0wl`;
+var nytInfo = document.querySelector(".nyt-info")
 // click on button
 //NYT Section
 $(button).on("click", function (event) {
@@ -32,41 +33,38 @@ function getNews() {
     })
     .then(function (data) {
       //getting the info from NYT
-      console.log(data);
+      // console.log(data);
 
-      
-
-      // need to create an <img place for the picture
-      // var picture = data.response.docs[0].multimedia[0].url;
       var newsImg = document.querySelector("#news-img");
       var pictureDisplay = document.createElement("img");
       var headline = data.response.docs[0].headline.main;
       var firstPara = data.response.docs[0].lead_paragraph;
       var nytLink = data.response.docs[0].web_url;
       
-      newsImg.innerHTML = "";
-      // headline.innerHTML = "";
-      // firstPara.innerHTML = "";
-      // nytLink.innerHTML = "";
-
-      
-
-
       // console.log(nytLink)
       pictureDisplay.setAttribute(
-        "src",
+        "src", "https://www.nytimes.com/" +
         data.response.docs[0].multimedia[0].legacy.xlarge
       );
-      newsImg.appendChild(pictureDisplay);
+      
+     pictureDisplay.setAttribute("width", 300)
+      
 
       //displaying the items from NYT
+      $("#news-img").html("")
+      $("#output-h1").html("")
+      $("#output-h2").html("")
+      $(".nyt-link").html("")
 
-      $("#news-img").append(newsImg);
+      // $("#news-img").append(newsImg);
+      newsImg.appendChild(pictureDisplay);
       $("#output-h1").append(headline);
       $("#output-h2").append(firstPara);
       $(".nyt-link").html(
         `<a href="${nytLink}/" target="_blank">Read Article</a>`
       );
+      
     });
+    
 }
 //wiki section
