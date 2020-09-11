@@ -23,7 +23,9 @@
     font-size: medium;
 }
 #output-h2{
-    
+    text-align: center;
+    text-emphasis: bold;
+    font-size: 10px;
 }
 
 .container{

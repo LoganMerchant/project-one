@@ -1,42 +1,3 @@
-// var api = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=7aa4007d232b4971be8c8b229d1ca299'
-
-// fetch(api)
-// .then(function (response) {
-//   var data = response.json();
-//   return data;
-//   console.log(data)
-// })
-// .then(function (data) {
-//     console.log(data)
-
-//   })
-// var url =
-// "http://newsapi.org/v2/everything?" +
-// "q=Apple&" +
-// "from=2020-09-10&" +
-// "sortBy=popularity&" +
-// "apiKey=7aa4007d232b4971be8c8b229d1ca299";
-
-// function myFunction() {
-// var searchTerm = document.querySelector("format-control").value;
-
-//   var req = new Request(url);
-
-//   fetch(req).then(function (response) {
-//     console.log(response.json());
-
-//   })
-//   .then(function(response) {
-//     console.log(response.data[0]);
-
-//     var responseContainerEl = document.querySelector('#response-container')
-
-//     responseContainerEl.innerHTML = ''
-
-//     var newsHeadline = document.createElement('div')
-//     // newsHeadline.setAttribute
-//   })
-// }
 var button = $(".btn");
 var newsSearch = $(".form-control").val();
 var list = JSON.parse(localStorage.getItem("headlines")) || [];
@@ -73,9 +34,15 @@ function getNews() {
       // var picture = data.response.docs[0].multimedia[0].url;
       var headline = data.response.docs[0].headline.main;
       var firstPara = data.response.docs[0].lead_paragraph
-      
+      var nytLink = data.response.docs[0].web_url
+      // console.log(nytLink)
+
       $("#output-h1").append(headline);
       $("#output-h2").append(firstPara);
-      
+      // $(\'.nyt-link\').html(\"<a href=\" + nytLink + \">Read Article<\/a>\");
+
+      // $('.nyt-link').html("<a href=" + 'nytLink' + ">Read Article</a>");
+      $('.nyt-link').html(<a href="${nytLink}">Read Article</a>);
+      // $(".nyt-link").wrap('<a' href='${ntyLink}/>')
     });
 }

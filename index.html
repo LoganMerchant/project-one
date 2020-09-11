@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Covid Travel</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- bootstrap just in case! -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <!-- <header class="intro">What Music is the news telling you to listen too?</header> -->
 
-</head>
-<!-- <header class="intro">What Music is the news telling you to listen too?</header> -->
-
-
-
-
-<body>
-  <div class="container" id="news-api">
-    <h1 class="instructions">We can't travel now so let us take you there!</h1>
-    <h2 class="instructions">which country do you want to visit?</h2>
-    <div class="input-group ">
-      <input type="text" class="form-control" placeholder="search" aria-label="Recipient's zipcode" aria-describedby="button-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-outline-light" type="button" id="button-addon2">Go!</button>
+  <body>
+    <div class="container" id="news-api">
+      <h1 class="instructions">
+        We can't travel now so let us take you there!
+      </h1>
+      <h2 class="instructions">which country do you want to visit?</h2>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="search"
+          aria-label="Recipient's zipcode"
+          aria-describedby="button-addon2"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            id="button-addon2"
+          >
+            Go!
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="nyt-info">
-    <h1 id="output-h1"></h1>
-    <h2 id="output-h2"></h2>
-  </div>
+    <div class="nyt-info">
+      <h1 id="output-h1"></h1>
+      <h2 id="output-h2"></h2>
+      <a class="nyt-link"></a>
+    </div>
 
-  <!-- <button onclick='getNews()'>Get News</button>
+    <!-- <button onclick='getNews()'>Get News</button>
   <div id="output"></div> -->
- 
-    
-  
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
-    
-</body>
+  </body>
 </html>
