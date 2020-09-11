@@ -18,14 +18,16 @@
     text-align: center;
     font-size: 20px;
 }
-#output-h1{
+.nyt-info{
     text-align: center;
-    font-size: medium;
+}
+#output-h1{
+    
+    font-size: 30px;
+    text-emphasis: bold;
 }
 #output-h2{
-    text-align: center;
-    text-emphasis: bold;
-    font-size: 10px;
+    font-size: 20px;
 }
 
 .container{

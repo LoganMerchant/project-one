@@ -39,10 +39,7 @@ function getNews() {
 
       $("#output-h1").append(headline);
       $("#output-h2").append(firstPara);
-      // $(\'.nyt-link\').html(\"<a href=\" + nytLink + \">Read Article<\/a>\");
-
-      // $('.nyt-link').html("<a href=" + 'nytLink' + ">Read Article</a>");
-      $('.nyt-link').html(<a href="${nytLink}">Read Article</a>);
-      // $(".nyt-link").wrap('<a' href='${ntyLink}/>')
+      $('.nyt-link').html(`<a href="${nytLink}/" target="_blank">Read Article</a>`);
+      
     });
 }
