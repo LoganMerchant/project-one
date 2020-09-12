@@ -1,0 +1,76 @@
+body {
+    box-sizing: border-box;
+}
+
+.recipe-div {
+    margin: 40px 30px auto 30px;
+    display: block;
+}
+
+.recipe-title {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Allan', cursive;
+}
+
+.recipe-description {
+    font-size: 14px;
+    text-align: justify;
+    margin: 20px;
+    font-family: 'GFS Neohellenic', sans-serif;
+}
+
+.recipe-ingredients {
+    font-size: 12px;
+    display: inline;
+    font-family: 'GFS Neohellenic', sans-serif;
+}
+
+.recipe-instructions {
+    font-size: 14px;
+    font-family: 'GFS Neohellenic', sans-serif;
+}
+
+.recipe-instruction-header, .ingredient-header {
+    margin: 20px;
+    font-size: 20px;
+    font-family: 'Allan', cursive;
+    text-align: center;
+}
+
+.recipe-container {
+    border: 3px solid darkgoldenrod;
+    background-color: lightyellow;
+    margin: 40px;
+    text-align: center;
+    display:flex;
+    border-radius: 20px;
+
+}
+
+.step-list {
+    margin: 20px;
+}
+
+.item {
+    margin: 10px 10px;
+    font-size: 12px;
+}
+
+.recipe-img {
+    margin: 20px;
+    border: 2px solid darkgray;
+    box-shadow: 2px 2px darkslategray;
+    border-radius: 10px;
+    max-width: 50%;
+    max-height: 30%;
+}
+
+table td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 5px;
+}
+
+      
