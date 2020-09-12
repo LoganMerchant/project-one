@@ -251,6 +251,8 @@ var countryCodesObj = {
     "QA": "Qatar",
     "MZ": "Mozambique"
 };
+// Defines an empty global variable for the Spotify access token
+var token = '';
 
 // Transforms the user's input into a country code
 var getCountryCode = function(searchedCountry) {
@@ -281,8 +283,7 @@ var spotifyUserAuthorization = function() {
 };
 
 // Fetches the top playlists for a given country.
-var fetchPlaylist = function(formattedCountry) {
-    var token = document.location.hash.split("=")[1].split("&")[0];
+var fetchPlaylist = function(formattedCountry, token) {
     var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country=" + formattedCountry;
     
     fetch(searchUri, {
@@ -301,6 +302,36 @@ var fetchPlaylist = function(formattedCountry) {
     })
 };
 
+// Displays playlists for the searched country.
 var displayPlaylist = function (data) {
     console.log(data);
 };
+
+// Checks to see if user has an access token for Spotify
+var tokenCheck = function() {
+    // Pulls any token saved in sessionStorage
+    var savedToken = sessionStorage.getItem("token");
+    // Finds any hash fragments with in the url.
+    var receivedToken = document.location.hash;
+
+    // If there is no token in sessionStorage and there is no hash fragment with an access token...
+    if (!savedToken && !receivedToken) {
+        // Redirect the user to Spotify's authorization page.
+        spotifyUserAuthorization();
+    // If there is a hash fragment with an access token...
+    } else if (receivedToken.includes("access_token=")) {
+        // Isolate the access token in it's own string...
+        receivedToken = receivedToken.split("=")[1].split("&")[0];
+        // Set the token in sessionStorage.
+        sessionStorage.setItem("token", receivedToken);
+        // Set the global var of `token` to match the isolated token.
+        token = receivedToken;
+    } else {
+        // Set the global var of `token` to match the token in sessionStorage.
+        token = savedToken;
+    };
+    // Verifies that a token is being set for this script. 
+    console.log("Token set as: " + token);
+};
+
+tokenCheck();
