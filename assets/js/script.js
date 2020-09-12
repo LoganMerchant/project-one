@@ -307,6 +307,9 @@ var fetchPlaylist = function(formattedCountry, token) {
 
 // Displays playlists for the searched country.
 var displayPlaylist = function (data) {
+    // Empties any previous search...just in case
+    playlistContainerEl.innerHTML = "";
+    // Creates a playlist container with various info, for the first 5 playlists returned by Spotify
     for (var i = 0; i < 5; i++) {
         var playlistEl = document.createElement("div");
         var playlistTitle = document.createElement("h2");
@@ -315,7 +318,7 @@ var displayPlaylist = function (data) {
         var playlistImg = document.createElement("img");
         var playlistTrackCount = document.createElement("p");
 
-        playlistEl.classList = "border bd-cyan border-size-4 border-groove";
+        playlistEl.classList = "border bd-cyan border-size-2 border-dotted";
         playlistTitle.textContent = data.playlists.items[i].name;
         playlistSubtitle.innerHTML = data.playlists.items[i].description;
         playlistImgContainer.classList = "img-container drop-shadow";
