@@ -260,7 +260,7 @@ var getCountryCode = function(searchedCountry) {
     for (var i = 0; i < formattedCountry.length; i++) {
         // For each word(index), capitalize the first letter and keep the rest as lowercase
         formattedCountry[i] = formattedCountry[i].charAt(0).toUpperCase() + formattedCountry[i].substring(1);
-    }
+    };
 
     // Joins each of the indexes together and puts whitespace between them
     formattedCountry = formattedCountry.join(" ");
@@ -270,7 +270,6 @@ var getCountryCode = function(searchedCountry) {
         return countryCodesObj[key] === formattedCountry;
     });
 };
-
 
 // !!!! MUST BE DONE BEFORE RESULTS ARE SHOWN !!!!
 // Asks user to authorize this application
@@ -282,9 +281,9 @@ var spotifyUserAuthorization = function() {
 };
 
 // Fetches the top playlists for a given country.
-var fetchPlaylist = function(searchedCountry) {
+var fetchPlaylist = function(formattedCountry) {
     var token = document.location.hash.split("=")[1].split("&")[0];
-    var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country=" + searchedCountry;
+    var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country=" + formattedCountry;
     
     fetch(searchUri, {
         // Provides the temporary authorization token in the request
@@ -296,8 +295,12 @@ var fetchPlaylist = function(searchedCountry) {
     .then(function(response) {
         return response.json();
     })
-    // console.logs the data JSONified data
+    // console.logs the JSONified data
     .then(function(data) {
-        console.log(data);
+        displayPlaylist(data);
     })
+};
+
+var displayPlaylist = function (data) {
+    console.log(data);
 };
