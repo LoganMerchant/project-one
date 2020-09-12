@@ -1,3 +1,6 @@
+// Selects the `playlist-container` id
+var playlistContainerEl = document.querySelector("#playlist-container");
+
 // Used to convert a user's search into a country code.
 var countryCodesObj = {
     "BD": "Bangladesh",
@@ -305,7 +308,8 @@ var fetchPlaylist = function(formattedCountry, token) {
 // Displays playlists for the searched country.
 var displayPlaylist = function (data) {
     var createPlaylistContainer = document.createElement("div");
-    
+    createPlaylistContainer.textContent = "hello world";
+    playlistContainerEl.appendChild(createPlaylistContainer);
     console.log(data);
 };
 
