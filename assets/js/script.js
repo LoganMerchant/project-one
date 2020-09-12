@@ -304,6 +304,8 @@ var fetchPlaylist = function(formattedCountry, token) {
 
 // Displays playlists for the searched country.
 var displayPlaylist = function (data) {
+    var createPlaylistContainer = document.createElement("div");
+    
     console.log(data);
 };
 
