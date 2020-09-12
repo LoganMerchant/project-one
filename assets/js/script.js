@@ -307,9 +307,29 @@ var fetchPlaylist = function(formattedCountry, token) {
 
 // Displays playlists for the searched country.
 var displayPlaylist = function (data) {
-    var createPlaylistContainer = document.createElement("div");
-    createPlaylistContainer.textContent = "hello world";
-    playlistContainerEl.appendChild(createPlaylistContainer);
+    for (var i = 0; i < 5; i++) {
+        var playlistEl = document.createElement("div");
+        var playlistTitle = document.createElement("h2");
+        var playlistSubtitle = document.createElement("h4");
+        var playlistImgContainer = document.createElement("div");
+        var playlistImg = document.createElement("img");
+        var playlistTrackCount = document.createElement("p");
+
+        playlistEl.classList = "border bd-cyan border-size-4 border-groove";
+        playlistTitle.textContent = data.playlists.items[i].name;
+        playlistSubtitle.innerHTML = data.playlists.items[i].description;
+        playlistImgContainer.classList = "img-container drop-shadow";
+        playlistImgContainer.style = "width: 15em; height: 15em;";
+        playlistImg.setAttribute("src", data.playlists.items[i].images[0].url);
+        playlistTrackCount.textContent = "Total track count: " + data.playlists.items[i].tracks.total;
+
+        playlistEl.appendChild(playlistTitle);
+        playlistEl.appendChild(playlistSubtitle);
+        playlistImgContainer.appendChild(playlistImg);
+        playlistEl.appendChild(playlistImgContainer);
+        playlistEl.appendChild(playlistTrackCount);
+        playlistContainerEl.appendChild(playlistEl);
+    };
     console.log(data);
 };
 
