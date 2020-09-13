@@ -1,5 +1,6 @@
 // Selects the `playlist-container` id
 var playlistContainerEl = document.querySelector("#playlist-container");
+var welcomeEl = document.querySelector("#welcome");
 
 // Used to convert a user's search into a country code.
 var countryCodesObj = {
@@ -270,6 +271,9 @@ var getCountryCode = function(searchedCountry) {
     // Joins each of the indexes together and puts whitespace between them
     formattedCountry = formattedCountry.join(" ");
 
+    // Creates a title for the page with the search country.
+    welcomeEl.textContent = "Listen to Spotify's top playlists for " + formattedCountry + "!"
+
     // Look over the countryCodesObj keys, find the one that matches the searchedCountry, and return it.
     return Object.keys(countryCodesObj).find(function(key) {
         return countryCodesObj[key] === formattedCountry;
@@ -346,7 +350,7 @@ var tokenCheck = function() {
     // If there is no token in sessionStorage and there is no hash fragment with an access token...
     if (!savedToken && !receivedToken) {
         // Redirect the user to Spotify's authorization page.
-        spotifyUserAuthorization();
+        // spotifyUserAuthorization();
     // If there is a hash fragment with an access token...
     } else if (receivedToken.includes("access_token=")) {
         // Isolate the access token in it's own string...
