@@ -314,7 +314,7 @@ var displayPlaylist = function (data) {
     // Empties any previous search...just in case
     playlistContainerEl.innerHTML = "";
     // Creates a playlist container with various info, for the first 5 playlists returned by Spotify
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 9; i++) {
         var playlistEl = document.createElement("div");
         var playlistTitle = document.createElement("h2");
         var playlistSubtitle = document.createElement("h4");
@@ -323,20 +323,19 @@ var displayPlaylist = function (data) {
         var playlistTrackCount = document.createElement("p");
         var playlistLink = document.createElement("p");
 
-        playlistEl.classList = "border bd-cyan border-size-2 border-dotted";
+        playlistEl.classList = "colspan-3 offset-1 border m-3 bg-steel-hover text-center";
         playlistTitle.textContent = data.playlists.items[i].name;
         playlistSubtitle.innerHTML = data.playlists.items[i].description;
-        playlistImgContainer.classList = "img-container drop-shadow";
-        playlistImgContainer.style = "width: 15em; height: 15em;";
+        playlistImgContainer.classList = "img-container";
+        playlistImgContainer.style = "width: 300px; height: 300px; margin: auto;";
         playlistImg.setAttribute("src", data.playlists.items[i].images[0].url);
         playlistTrackCount.textContent = "Total track count: " + data.playlists.items[i].tracks.total;
         playlistLink.innerHTML = "Listen to " + data.playlists.items[i].name + 
         " on <a href=" + data.playlists.items[i].external_urls.spotify + " target='_blank'>Spotify</a>";
 
-        playlistEl.appendChild(playlistTitle);
-        playlistEl.appendChild(playlistSubtitle);
         playlistImgContainer.appendChild(playlistImg);
         playlistEl.appendChild(playlistImgContainer);
+        playlistEl.appendChild(playlistSubtitle);
         playlistEl.appendChild(playlistTrackCount);
         playlistEl.appendChild(playlistLink);
         playlistContainerEl.appendChild(playlistEl);
