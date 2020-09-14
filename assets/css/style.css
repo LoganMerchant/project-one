@@ -12,7 +12,7 @@
     background: linear-gradient(-45deg, blue, maroon, darkorange, darkgreen);
     background-size: 400% 400%;
     position: relative;
-    animation: change 10s ease-in-out infinite; */
+    animation: change 10s ease-in-out infinite; 
 }
 .instructions{
     text-align: center;
