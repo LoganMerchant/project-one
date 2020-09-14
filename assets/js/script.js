@@ -321,6 +321,7 @@ var displayPlaylist = function (data) {
         var playlistImgContainer = document.createElement("div");
         var playlistImg = document.createElement("img");
         var playlistTrackCount = document.createElement("p");
+        var playlistLink = document.createElement("p");
 
         playlistEl.classList = "border bd-cyan border-size-2 border-dotted";
         playlistTitle.textContent = data.playlists.items[i].name;
@@ -329,12 +330,15 @@ var displayPlaylist = function (data) {
         playlistImgContainer.style = "width: 15em; height: 15em;";
         playlistImg.setAttribute("src", data.playlists.items[i].images[0].url);
         playlistTrackCount.textContent = "Total track count: " + data.playlists.items[i].tracks.total;
+        playlistLink.innerHTML = "Listen to " + data.playlists.items[i].name + 
+        " on <a href=" + data.playlists.items[i].external_urls.spotify + " target='_blank'>Spotify</a>";
 
         playlistEl.appendChild(playlistTitle);
         playlistEl.appendChild(playlistSubtitle);
         playlistImgContainer.appendChild(playlistImg);
         playlistEl.appendChild(playlistImgContainer);
         playlistEl.appendChild(playlistTrackCount);
+        playlistEl.appendChild(playlistLink);
         playlistContainerEl.appendChild(playlistEl);
     };
     console.log(data);
