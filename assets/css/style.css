@@ -3,8 +3,11 @@ body {
 }
 
 .recipe-div {
-    margin: 40px 30px auto 30px;
-    display: block;
+    margin: 20px;
+    display: inline-flex;
+    text-align: left;
+    width: 90%;
+    height: 50%;
 }
 
 .recipe-title {
@@ -22,14 +25,19 @@ body {
 }
 
 .recipe-ingredients {
-    font-size: 12px;
-    display: inline;
+    font-size: 14px;
+    display: inline-block;
     font-family: 'GFS Neohellenic', sans-serif;
+    margin: auto;
+    padding: 20px;
+    width: auto;
+    justify-content: space-around;
 }
 
 .recipe-instructions {
     font-size: 14px;
     font-family: 'GFS Neohellenic', sans-serif;
+    margin-bottom: 30px;
 }
 
 .recipe-instruction-header, .ingredient-header {
@@ -46,16 +54,17 @@ body {
     text-align: center;
     display:flex;
     border-radius: 20px;
+    display: block;
 
 }
 
-.step-list {
-    margin: 20px;
-}
-
-.item {
-    margin: 10px 10px;
-    font-size: 12px;
+.instruction-div {
+    width: 90%;
+    display: flex;
+    text-align: left;
+    margin-left: 30px;
+    font-size: 14px;
+    font-family: 'GFS Neohellenic', sans-serif;
 }
 
 .recipe-img {
@@ -63,14 +72,8 @@ body {
     border: 2px solid darkgray;
     box-shadow: 2px 2px darkslategray;
     border-radius: 10px;
-    max-width: 50%;
-    max-height: 30%;
+    object-fit: cover;
+    max-height: 300px;
+    max-width: 300px;
 }
-
-table td {
-    border: 1px solid black;
-    text-align: left;
-    padding: 5px;
-}
-
       
