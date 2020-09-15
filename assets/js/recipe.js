@@ -4,6 +4,7 @@ var container = document.querySelector("#container");
 
 var cuisine;
 
+//get the list of recipies based on cuisine type == get the id for the first recipe
 getRecipeList = (cuisine) => {
     fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
         "method": "GET",
@@ -14,19 +15,20 @@ getRecipeList = (cuisine) => {
     }).then(response => {
 if(response.ok) {
     response.json().then(function(data) {
-        console.log(data);
-        console.log(data.results[0].id, data.results[0].title);
+        //get the title and display it
         var title = document.querySelector("#title");
         title.textContent += " " + data.results[0].title;
+        //get the id for the next function
         id = data.results[0].id;
        getRecipe(id);
+       console.log(cuisine);
     })
 }
 });
 
 };
 
-
+    //based upon the id, get the details for the recipe
     getRecipe = (id) => {
         fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/information", {
         "method": "GET",
@@ -38,11 +40,11 @@ if(response.ok) {
     .then(response => { 
         if(response.ok) {
             response.json().then(function(data){ 
-                console.log(data);
                //put the description in
                var desc = data.summary;
                var description = document.createElement("h4");
                description.setAttribute("class", "recipe-description");
+               //set the description--using innerHTML so that the links they give us will work
                description.innerHTML = desc;
                container.appendChild(description);
                var ingTitle = document.createElement("p");
@@ -52,15 +54,17 @@ if(response.ok) {
                //create a new container for the ingredients, and image
                var ingDiv = document.createElement("div");
                ingDiv.setAttribute("class", "recipe-div");
+               //get the image they provide and display it
                var imgLink = data.image;
                var img = document.createElement("img");
                img.setAttribute("class", "recipe-img");
                img.setAttribute("src", imgLink);
                ingDiv.appendChild(img);
+               //create two lists for ingredients--split them into two
                var list1Div = document.createElement("div");
                 list1Div.setAttribute("class", "recipe-ingredients");
                 var list2Div = document.createElement("div");
-                list2Div.setAttribute("class", "recipe-ingredients"); //extendedIngredients[0].originalString
+                list2Div.setAttribute("class", "recipe-ingredients"); 
                 var ingList = data.extendedIngredients;
                 var list1 = document.createElement("ul");
                 list1.setAttribute("class", "recipe-ingredients");
@@ -78,14 +82,14 @@ if(response.ok) {
                 }
                 ingDiv.appendChild(list2Div);
                 container.appendChild(ingDiv);
+                //get the instructions, if any, and display them
                 var insTitle = document.createElement("p");
                 insTitle.setAttribute("class", "recipe-instruction-header");
                 insTitle.textContent ="Instructions";
                 container.appendChild(insTitle);
-                var inst = data.analyzedInstructions[0].steps; //analyzedInstructions[0].steps[0].step
+                var inst = data.analyzedInstructions[0].steps; 
                 var instructionDiv = document.createElement("div");
                 var insList = document.createElement("ul");
-               // insList.setAttribute("class", )
                 instructionDiv.setAttribute("class", "instruction-div");
                 for(i=0; i<inst.length; i++) {
                     var instruction = document.createElement("li");
@@ -103,6 +107,7 @@ if(response.ok) {
     });
     }; 
 
+    //get the search parameter (cuisine) and use it to search the recipies
     searchParam = () => {
         var paramString = window.location;
         var searchParams = new URLSearchParams(paramString);
