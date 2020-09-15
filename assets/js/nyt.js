@@ -19,6 +19,7 @@ $(button).on("click", function (event) {
     localStorage.setItem("headlines", JSON.stringify(list));
 
     getNews(newsSearch);
+    wikiInfo(newsSearch)
   }
 });
 function getNews() {
@@ -84,3 +85,21 @@ function getNews() {
     });
 }
 //wiki section
+
+function wikiInfo(){
+  fetch(
+      // Make a fetch request to Wikipedia to get a random article title
+      `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=${newsSearch}&limit=1&suggest=1`
+    )
+    .then(function(wikiResponse){
+      var wikiData = wikiResponse.json();
+        return wikiData;
+    })
+    .then(function (wikiData){
+      console.log(wikiData)
+
+      // var wikiLink = wikiData.[3].[0]
+    })
+  
+  //   })
+}
