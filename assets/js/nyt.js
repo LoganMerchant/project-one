@@ -1,5 +1,5 @@
 var button = $(".btn");
-var newsSearch = $(".form-control").val();
+var searchInfo = $(".form-control").val();
 var list = JSON.parse(localStorage.getItem("headlines")) || [];
 var key = `pZwZYOOhZZTfRVT0WHKsRuANSpS6D0wl`;
 var nytInfo = document.querySelector(".nyt-info");
@@ -8,23 +8,23 @@ var nytInfo = document.querySelector(".nyt-info");
 $(button).on("click", function (event) {
   event.preventDefault();
 
-  newsSearch = $(".form-control").val();
+  searchInfo = $(".form-control").val();
   $("form-control").empty();
-  console.log(newsSearch);
+  console.log(searchInfo);
   // make sure to enter a valid search item
-  if (newsSearch === "") {
+  if (searchInfo === "") {
     alert("input a country please");
   } else {
-    list.push(newsSearch);
+    list.push(searchInfo);
     localStorage.setItem("headlines", JSON.stringify(list));
 
-    getNews(newsSearch);
-    wikiInfo(newsSearch)
+    getNews(searchInfo);
+    setup(searchInfo)
   }
 });
 function getNews() {
   fetch(
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${newsSearch}&api-key=${key}`
+    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInfo}&api-key=${key}`
   )
     // sending the info to NYT
     .then(function (response) {
@@ -85,11 +85,11 @@ function getNews() {
     });
 }
 //wiki section
-
+//  var wikiUrl = '`https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search='
 // function wikiInfo(){
 //   fetch(
 //       // Make a fetch request to Wikipedia to get a random article title
-//       `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=${newsSearch}&limit=1&suggest=1`
+//       `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=${searchInfo}`
 //     )
 //     .then(function(wikiResponse){
 //       var wikiData = wikiResponse.json();
@@ -103,3 +103,59 @@ function getNews() {
   
 //   //   })
 // }
+
+var wikihUrl =
+  'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=';
+var contentUrl =
+  'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=';
+
+
+
+var counter = 0;
+
+function setup() {
+  // noCanvas();
+  
+  // searchInfo.changed(startSearch);
+  goWiki(userInput.value());
+
+  function startSearch() {
+    counter = 0;
+    goWiki(userInput.value());
+  }
+
+  function goWiki(searchInfo) {
+    counter = counter + 1;
+
+    if (counter < 10) {
+      //var term = userInput.value();
+      var url = wikihUrl + searchInfo;
+      loadJSON(url, gotSearch, 'jsonp');
+    }
+  }
+
+  function gotSearch(wikiData) {
+    console.log(wikiData);
+    var len = wikiData[1].length;
+    var index = floor(random(len));
+    var title = wikiData[1][index];
+    title = title.replace(/\s+/g, '_');
+    createDiv(title);
+    console.log('Querying: ' + title);
+    var url = contentUrl + title;
+    loadJSON(url, gotContent, 'jsonp');
+  }
+
+  function gotContent(wikiData) {
+    var page = wikiData.query.pages;
+    var pageId = Object.keys(wikiData.query.pages)[0];
+    console.log(pageId);
+    var content = page[pageId].revisions[0]['*'];
+    console.log(content);
+    var wordRegex = /\b\w{4,}\b/g;
+    var words = content.match(wordRegex);
+    var word = random(words);
+    goWiki(word);
+    console.log(word);
+  }
+}
