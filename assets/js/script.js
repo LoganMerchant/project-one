@@ -1,4 +1,4 @@
-// Selects the `playlist-container` id
+// Creates vars for ids
 var playlistContainerEl = document.querySelector("#playlist-container");
 var welcomeEl = document.querySelector("#welcome");
 
@@ -271,14 +271,21 @@ var getCountryCode = function(searchedCountry) {
     // Joins each of the indexes together and puts whitespace between them
     formattedCountry = formattedCountry.join(" ");
 
-    // Creates a title for the page with the search country.
-    welcomeEl.textContent = "Listen to Spotify's top playlists for " + formattedCountry + "!"
+    var keys = Object.keys(countryCodesObj);
 
-    // Look over the countryCodesObj keys, find the one that matches the searchedCountry, and return it.
-    return Object.keys(countryCodesObj).find(function(key) {
-        return countryCodesObj[key] === formattedCountry;
-    });
-};
+    searchedCountry = searchedCountry.toUpperCase();
+
+    if (keys.includes(searchedCountry)) {
+        welcomeEl.textContent = "Here's what people in " + searchedCountry + " are listening to now!";
+        fetchPlaylist(searchedCountry, token);
+    } else {
+        welcomeEl.textContent = "Here's what people in " + formattedCountry + " are listening to now!";
+        var formattedSearch = keys.find(function(key) {
+            return countryCodesObj[key] === formattedCountry;
+        });
+        fetchPlaylist(formattedSearch, token);
+    };
+};r
 
 // !!!! MUST BE DONE BEFORE RESULTS ARE SHOWN !!!!
 // Asks user to authorize this application
@@ -301,12 +308,15 @@ var fetchPlaylist = function(formattedCountry, token) {
     })
     // Formats the response in JSON
     .then(function(response) {
-        return response.json();
-    })
-    // console.logs the JSONified data
-    .then(function(data) {
-        displayPlaylist(data);
-    })
+        if (response.ok) {
+            response.json().then(function(data) {
+                displayPlaylist(data);
+            })
+        } else {
+            welcomeEl.textContent = "Error: " + response.statusText + "! Please try again.";
+            playlistContainerEl.innerHTML = "";
+        };
+    });
 };
 
 // Displays playlists for the searched country.
@@ -323,7 +333,7 @@ var displayPlaylist = function (data) {
         var playlistTrackCount = document.createElement("p");
         var playlistLink = document.createElement("p");
 
-        playlistEl.classList = "colspan-3 offset-1 border m-3 bg-steel-hover text-center";
+        playlistEl.classList = "colspan-3 offset-1 border m-3 p-3 bg-steel-hover text-center";
         playlistTitle.textContent = data.playlists.items[i].name;
         playlistSubtitle.innerHTML = data.playlists.items[i].description;
         playlistImgContainer.classList = "img-container";
