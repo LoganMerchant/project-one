@@ -19,7 +19,7 @@ $(button).on("click", function (event) {
     localStorage.setItem("headlines", JSON.stringify(list));
 
     getNews(newsSearch);
-    wikiInfo(newsSearch)
+    // wikiInfo(newsSearch)
   }
 });
 function getNews() {
