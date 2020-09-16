@@ -18,15 +18,17 @@
     text-align: center;
     font-size: 20px;
 }
-.nyt-info{
+.nyt-info,
+#wiki-section {
     text-align: center;
 }
-#output-h1{
-    
+#output-h1,
+#wiki-h1 {
     font-size: 30px;
     text-emphasis: bold;
 }
-#output-h2{
+#output-h2,
+#wiki-h2 {
     font-size: 20px;
 }
 
