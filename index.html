@@ -4,12 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squiggle Brackets</title>
+<<<<<<< HEAD
     <!-- metro cdn -->
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css">
     <!-- unique stylesheet -->
     <link rel="stylesheet" href="./assets/style.css" />
+=======
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css">
+    <!-- bootstrap just in case! -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+>>>>>>> 59d00a0d400fc9224d6e911d3102a80efe87deb2
 </head>
+
 <body>
+<<<<<<< HEAD
     <header>
       <!-- PLACEHOLDER -->
       <img src="https://www.webfx.com/blog/images/cdn.designinstruct.com/files/582-how-to-image-placeholders/generic-image-placeholder.png">
@@ -39,6 +49,119 @@
 
     <div id="selected-result"></div>
     
+=======
+ 
+  <header>
+    <div class="h-100 p-ab">
+      <button class="button square pos-absolute pos-top-right"
+            id="sidebar-toggle-2">
+        <span class="mif-menu"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+  
+    <aside class="sidebar pos-absolute z-2" data-role="sidebar" data-toggle="#sidebar-toggle-2">
+      <ul class="sidebar-menu">
+          <li><a href="index.html"><span class="mif-home icon"></span>Home</a></li>
+          <li class="divider"></li>
+          <li><a href="./html/recipes.html"><span class="mif-spoon-fork icon"></span>Recipes</a></li>
+          <li><a href="./html/news.html"><span class="mif-open-book icon"></span>News</a></li>
+          <li><a href="./html/music.html"><span class="mif-music icon"></span>Music</a></li>
+          <li><a href="./html/wikipedia.html"><span class="mif-wikipedia icon"></span>Wikipedia</a></li>
+      </ul>
+    </aside>
+
+  <div class="container">
+
+    <h1>Travel The World</h1>
+    <h2>Without Leaving Home</h2>
+
+<div class="search-container">
+  <h3>What country would you like to visit?</h3>
+  <!--<select name="genre-selector" id="rating">-->
+  <div class="search-form">
+    <input type="text" placeholder="Search Countries">
+  </div>
+  <button class="button large rounded drop-shadow" onclick="myFunction()">Search!</button>
+</div>
+
+<div class="grid">
+  <div class="row">
+<div class="flag-container card cell" style="height: 50px; width: 100px">
+  Flag Here
+</div>
+</div>
+</div>
+
+<div class="grid">
+  <div class="row">
+      <div class="card cell">
+        <div class="card-inner">
+          <div class="card-front">Front</div>     
+          <div class="card-back">
+            <a href="./html/recipes.html">
+              <button class="button dark rounded drop-shadow">Recipes</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card cell">
+        <div class="card-inner">
+          <div class="card-front">Front</div>     
+          <div class="card-back">
+            <a href="./html/news.html">
+              <button class="button dark rounded drop-shadow">News</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card cell">
+        <div class="card-inner">
+          <div class="card-front">Front</div>     
+          <div class="card-back">
+            <a href="./html/music.html">
+              <button class="button dark rounded drop-shadow">Music</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card cell">
+        <div class="card-inner">
+          <div class="card-front">Front</div>     
+          <div class="card-back">
+            <a href="./html/wikipedia.html">
+              <button class="button dark rounded drop-shadow">Wikipedia</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+ 
+    
+    
+     
+ 
+</main>
+
+
+
+
+
+  
+
+    <div id="response-header"></div>
+    <div id="response-container"></div>
+    <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
+>>>>>>> 59d00a0d400fc9224d6e911d3102a80efe87deb2
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
     
