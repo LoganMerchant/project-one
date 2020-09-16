@@ -22,14 +22,14 @@ body {
 
 .container h1, h2 {
     color: #d7ceb2;
-	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	/* text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72; */
 	font: 80px 'BazarMedium';
 	letter-spacing: 10px;
 }
 
 .search-container h3 {
 	color: #d7ceb2;
-	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	/* text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72; */
 	font: 40px 'BazarMedium';
 	letter-spacing: 10px;
 
@@ -103,49 +103,32 @@ body {
 
 /* BEGINNING OF RECIPE */
 
-.recipe-div {
-    margin: 20px;
-    display: inline-flex;
-    text-align: left;
-    width: 90%;
-    height: 50%;
-}
 
-.recipe-title {
-    font-size: 30px;
+  body {
+    
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(-45deg, blue, maroon, darkorange, darkgreen);
+    background-size: 400% 400%;
+    position: relative;
+    animation: change 10s ease-in-out infinite; 
+}
+.instructions{
     text-align: center;
-    margin-top: 20px;
-    font-family: 'Allan', cursive;
-}
-
-.recipe-description {
-    font-size: 14px;
-    text-align: justify;
-    margin: 20px;
-    font-family: 'GFS Neohellenic', sans-serif;
-}
-
-.recipe-ingredients {
-    font-size: 14px;
-    display: inline-block;
-    font-family: 'GFS Neohellenic', sans-serif;
-    margin: auto;
-    padding: 20px;
-    width: auto;
-    justify-content: space-around;
-}
-
-.recipe-instructions {
-    font-size: 14px;
-    font-family: 'GFS Neohellenic', sans-serif;
-    margin-bottom: 30px;
-}
-
-.recipe-instruction-header, .ingredient-header {
-    margin: 20px;
     font-size: 20px;
-    font-family: 'Allan', cursive;
+}
+.nyt-info,
+#wiki-section {
     text-align: center;
+}
+#output-h1,
+#wiki-h1 {
+    font-size: 30px;
+    text-emphasis: bold;
+}
+#output-h2,
+#wiki-h2 {
+    font-size: 20px;
 }
 
 .recipe-container {
@@ -167,14 +150,14 @@ body {
     font-family: 'GFS Neohellenic', sans-serif;
 }
 
-.recipe-img {
-    margin: 20px;
-    border: 2px solid darkgray;
-    box-shadow: 2px 2px darkslategray;
-    border-radius: 10px;
-    object-fit: cover;
-    max-height: 300px;
-    max-width: 300px;
+@keyframes change {
+    0%{
+        background-position: 0 50%;
+    }50%{
+        background-position: 100% 50%;
+    }100%{
+        background-position: 0 50%;
+    }
 }
 
 /* END OF RECIPE */
