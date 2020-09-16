@@ -280,12 +280,12 @@ var getCountryCode = function(searchedCountry) {
         fetchPlaylist(searchedCountry, token);
     } else {
         welcomeEl.textContent = "Here's what people in " + formattedCountry + " are listening to now!";
-        var formattedSearch = keys.find(function(key) {
+        var countryCode = keys.find(function(key) {
             return countryCodesObj[key] === formattedCountry;
         });
-        fetchPlaylist(formattedSearch, token);
+        fetchPlaylist(countryCode, token);
     };
-};r
+};
 
 // !!!! MUST BE DONE BEFORE RESULTS ARE SHOWN !!!!
 // Asks user to authorize this application
