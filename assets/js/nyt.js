@@ -90,7 +90,7 @@ function getNews() {
 function wikiInfo(){
   fetch(
       // Make a fetch request to Wikipedia to get a random article title
-      `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=query&format=json&titles=${searchInfo}&prop=description&prop=description&prop=info%20Page`
+      `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=query&prop=info&format=json&titles=${searchInfo}&prop=description`
     )
     .then(function(wikiResponse){
       var wikiData = wikiResponse.json();
@@ -98,12 +98,21 @@ function wikiInfo(){
     })
     .then(function (wikiData){
       console.log(wikiData)
-      
-    //  var wikiLink = wikidata.query.pages[5058739].links[0].title;
-    //  var wikiDescript = 
-        var wikiTitle = wikiData.query.pages[10577].title
+      for(var i = 0; pageId > 0; i++)
+        
+        var pageId = wikiData.query.pages[i].pageid 
+
+        var wikiDescript = wikiData.query.pages[i].description
+        var wikiTitle = wikiData.query.pages[i].title
+        console.log(pageId)
+        
+        $("#wiki-h2").html("");
         $("#wiki-h1").html("");
-        $("#wiki-h1").append(wikiTitle) 
+
+        $("#wiki-h2").append(wikiDescript)
+        $("#wiki-h1").append(wikiTitle)
+        // $("#wiki-link").html(`<a href="https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/${searchInfo}/" target="_blank">Read Wiki Page</a>`)
+      
     })
     
 
