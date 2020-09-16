@@ -276,7 +276,7 @@ var getCountryCode = function(searchedCountry) {
     searchedCountry = searchedCountry.toUpperCase();
 
     if (keys.includes(searchedCountry)) {
-        welcomeEl.textContent = "Here's what people in " + searchedCountry + " are listening to now!";
+        welcomeEl.textContent = "Here's what people in the " + searchedCountry + " are listening to now!";
         fetchPlaylist(searchedCountry, token);
     } else {
         welcomeEl.textContent = "Here's what people in " + formattedCountry + " are listening to now!";
@@ -313,7 +313,7 @@ var fetchPlaylist = function(formattedCountry, token) {
                 displayPlaylist(data);
             })
         } else {
-            welcomeEl.textContent = "Error: " + response.statusText + "! Please try again.";
+            welcomeEl.textContent = "Error: " + response.status + "! Please try again.";
             playlistContainerEl.innerHTML = "";
         };
     });
@@ -333,7 +333,8 @@ var displayPlaylist = function (data) {
         var playlistTrackCount = document.createElement("p");
         var playlistLink = document.createElement("p");
 
-        playlistEl.classList = "colspan-3 offset-1 border m-3 p-3 bg-steel-hover text-center";
+        playlistEl.classList = "colspan-12 colspan-md-5 colspan-lg-3 offset-lg-1 " +
+        "border m-3 p-3 bg-steel-hover text-center";
         playlistTitle.textContent = data.playlists.items[i].name;
         playlistSubtitle.innerHTML = data.playlists.items[i].description;
         playlistImgContainer.classList = "img-container";
@@ -363,7 +364,7 @@ var tokenCheck = function() {
     // If there is no token in sessionStorage and there is no hash fragment with an access token...
     if (!savedToken && !receivedToken) {
         // Redirect the user to Spotify's authorization page.
-        spotifyUserAuthorization();
+        // spotifyUserAuthorization();
     // If there is a hash fragment with an access token...
     } else if (receivedToken.includes("access_token=")) {
         // Isolate the access token in it's own string...
@@ -381,3 +382,4 @@ var tokenCheck = function() {
 };
 
 tokenCheck();
+getCountryCode(searchedCountry);
