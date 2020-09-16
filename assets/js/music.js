@@ -333,7 +333,7 @@ var displayPlaylist = function (data) {
         var playlistTrackCount = document.createElement("p");
         var playlistLink = document.createElement("p");
 
-        playlistEl.classList = "colspan-12 colspan-md-5 colspan-lg-3 offset-lg-1 " +
+        playlistEl.classList = "colspan-8 colspan-md-5 colspan-lg-3 " +
         "border m-3 p-3 bg-steel-hover text-center";
         playlistTitle.textContent = data.playlists.items[i].name;
         playlistSubtitle.innerHTML = data.playlists.items[i].description;
