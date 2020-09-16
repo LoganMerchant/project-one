@@ -41,25 +41,6 @@ function getNews() {
       var headline = data.response.docs[0].headline.main;
       var firstPara = data.response.docs[0].lead_paragraph;
       var nytLink = data.response.docs[0].web_url;
-
-      // for (
-      //   var i = 0;
-      //   newsImg === undefined ||
-      //   headline === undefined ||
-      //   firstPara === undefined ||
-      //   nytLink === undefined;
-      //   i++
-      // ) {
-      //   var newsImg = document.querySelector("#news-img");
-      //   pictureDisplay = (
-      //     "src",
-      //     "https://www.nytimes.com/" +
-      //       data.response.docs[i].multimedia[i].legacy.xlarge);
-      //   var headline = data.response.docs[i].headline.main;
-      //   var firstPara = data.response.docs[i].lead_paragraph;
-      //   var nytLink = data.response.docs[i].web_url;
-      // } {
-// console.log(nytLink)
         pictureDisplay.setAttribute(
         "src",
         "https://www.nytimes.com/" +
