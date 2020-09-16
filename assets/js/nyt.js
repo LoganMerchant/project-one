@@ -19,7 +19,7 @@ $(button).on("click", function (event) {
     localStorage.setItem("headlines", JSON.stringify(list));
 
     getNews(searchInfo);
-    wikiInfo(searchInfo)
+    wikiInfo(searchInfo);
   }
 });
 function getNews() {
@@ -40,24 +40,21 @@ function getNews() {
       var pictureDisplay = document.createElement("img");
       var headline = data.response.docs[0]?.headline?.main;
       var firstPara = data.response.docs[0]?.lead_paragraph;
-      if(firstPara.length >= 500){
-        firstPara = firstPara.slice(0, 500) + "..."
+      if (firstPara.length >= 500) {
+        firstPara = firstPara.slice(0, 500) + "...";
       }
       var nytLink = data.response.docs[0]?.web_url;
-      
-      
-      if(data.response.docs[0]?.multimedia[0]?.legacy?.xlarge){
 
-      
+      if (data.response.docs[0]?.multimedia[0]?.legacy?.xlarge) {
         pictureDisplay.setAttribute(
-        "src",
-        "https://www.nytimes.com/" +
-          data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
-      );
-      newsImg.appendChild(pictureDisplay);
+          "src",
+          "https://www.nytimes.com/" +
+            data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
+        );
+        newsImg.appendChild(pictureDisplay);
 
-      pictureDisplay.setAttribute("width", 300);
-    }
+        pictureDisplay.setAttribute("width", 300);
+      }
 
       //displaying the items from NYT
       $("#news-img").html("");
@@ -72,42 +69,35 @@ function getNews() {
       $(".nyt-link").html(
         `<a href="${nytLink}/" target="_blank">Read Article</a>`
       );
-      
     });
 }
 // wiki section
- 
 
-function wikiInfo(){
+function wikiInfo() {
   fetch(
-      // Make a fetch request to Wikipedia to get a random article title
-      `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=query&prop=info&format=json&titles=${searchInfo}&prop=description`
-    )
-    .then(function(wikiResponse){
+    // Make a fetch request to Wikipedia to get a article title
+    `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=query&prop=info&format=json&titles=${searchInfo}&prop=description`
+  )
+    .then(function (wikiResponse) {
       var wikiData = wikiResponse.json();
-        return wikiData;
+      return wikiData;
     })
-    .then(function (wikiData){
-      console.log(wikiData)
-      
-        
-         
-        var keys = Object.keys(wikiData.query.pages)
-        var pageId = wikiData.query.pages[keys[0]].pageid
-        var wikiDescript = wikiData.query.pages[keys[0]].description
-        var wikiTitle = wikiData.query.pages[keys[0]].title
-        // console.log(pageId)
-        
-        $("#wiki-h2").html("");
-        $("#wiki-h1").html("");
+    .then(function (wikiData) {
+      console.log(wikiData);
 
-        $("#wiki-h2").append(wikiDescript)
-        $("#wiki-h1").append(wikiTitle)
-        $("#wiki-link").html(`<a href="https://en.wikipedia.org/wiki/${searchInfo}" target="_blank">Read Wiki Page</a>`)
-      
-    })
-    
+      var keys = Object.keys(wikiData.query.pages);
+      // var pageId = wikiData.query.pages[keys[0]].pageid;
+      var wikiDescript = wikiData.query.pages[keys[0]].description;
+      var wikiTitle = wikiData.query.pages[keys[0]].title;
+      // console.log(pageId)
 
+      $("#wiki-h2").html("");
+      $("#wiki-h1").html("");
+
+      $("#wiki-h2").append(wikiDescript);
+      $("#wiki-h1").append(wikiTitle);
+      $("#wiki-link").html(
+        `<a href="https://en.wikipedia.org/wiki/${searchInfo}" target="_blank">Read Wiki Page</a>`
+      );
+    });
 }
-
-
