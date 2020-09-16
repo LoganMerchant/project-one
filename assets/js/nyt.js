@@ -38,35 +38,26 @@ function getNews() {
 
       var newsImg = document.querySelector("#news-img");
       var pictureDisplay = document.createElement("img");
-      var headline = data.response.docs[0].headline.main;
-      var firstPara = data.response.docs[0].lead_paragraph;
-      var nytLink = data.response.docs[0].web_url;
+      var headline = data.response.docs[0]?.headline?.main;
+      var firstPara = data.response.docs[0]?.lead_paragraph;
+      if(firstPara.length >= 500){
+        firstPara = firstPara.slice(0, 500) + "..."
+      }
+      var nytLink = data.response.docs[0]?.web_url;
+      
+      
+      if(data.response.docs[0]?.multimedia[0]?.legacy?.xlarge){
 
-      // for (
-      //   var i = 0;
-      //   newsImg === undefined ||
-      //   headline === undefined ||
-      //   firstPara === undefined ||
-      //   nytLink === undefined;
-      //   i++
-      // ) {
-      //   var newsImg = document.querySelector("#news-img");
-      //   pictureDisplay = (
-      //     "src",
-      //     "https://www.nytimes.com/" +
-      //       data.response.docs[i].multimedia[i].legacy.xlarge);
-      //   var headline = data.response.docs[i].headline.main;
-      //   var firstPara = data.response.docs[i].lead_paragraph;
-      //   var nytLink = data.response.docs[i].web_url;
-      // } {
-// console.log(nytLink)
+      
         pictureDisplay.setAttribute(
         "src",
         "https://www.nytimes.com/" +
-          data.response.docs[0].multimedia[0].legacy.xlarge
+          data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
       );
+      newsImg.appendChild(pictureDisplay);
 
       pictureDisplay.setAttribute("width", 300);
+    }
 
       //displaying the items from NYT
       $("#news-img").html("");
@@ -98,20 +89,21 @@ function wikiInfo(){
     })
     .then(function (wikiData){
       console.log(wikiData)
-      for(var i = 0; pageId > 0; i++)
+      
         
-        var pageId = wikiData.query.pages[i].pageid 
-
-        var wikiDescript = wikiData.query.pages[i].description
-        var wikiTitle = wikiData.query.pages[i].title
-        console.log(pageId)
+         
+        var keys = Object.keys(wikiData.query.pages)
+        var pageId = wikiData.query.pages[keys[0]].pageid
+        var wikiDescript = wikiData.query.pages[keys[0]].description
+        var wikiTitle = wikiData.query.pages[keys[0]].title
+        // console.log(pageId)
         
         $("#wiki-h2").html("");
         $("#wiki-h1").html("");
 
         $("#wiki-h2").append(wikiDescript)
         $("#wiki-h1").append(wikiTitle)
-        // $("#wiki-link").html(`<a href="https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/wiki/${searchInfo}/" target="_blank">Read Wiki Page</a>`)
+        $("#wiki-link").html(`<a href="https://en.wikipedia.org/wiki/${searchInfo}" target="_blank">Read Wiki Page</a>`)
       
     })
     
