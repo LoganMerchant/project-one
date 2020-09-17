@@ -78,6 +78,13 @@ body {
     transform: rotateY(180deg);
 }
 
+.recipe-card-title {
+
+    font-size: 15px;
+    text-align: center;
+    margin-top: 5px;
+}
+
 
 
 @-webkit-keyframes gradientBG {
@@ -102,3 +109,92 @@ body {
 		background-position: 0% 50%;
 	}
 }
+<<<<<<< HEAD
+=======
+
+/* BEGINNING OF RECIPE */
+
+.recipe-div {
+    margin: 20px;
+    display: inline-flex;
+    text-align: left;
+    width: 90%;
+    height: 50%;
+}
+
+.recipe-title {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Allan', cursive;
+}
+
+.recipe-description {
+    font-size: 14px;
+    text-align: justify;
+    margin: 20px;
+    font-family: 'GFS Neohellenic', sans-serif;
+}
+
+.recipe-ingredients {
+    font-size: 14px;
+    display: inline-block;
+    font-family: 'GFS Neohellenic', sans-serif;
+    margin: auto;
+    padding: 20px;
+    width: auto;
+    justify-content: space-around;
+}
+
+.recipe-instructions {
+    font-size: 14px;
+    font-family: 'GFS Neohellenic', sans-serif;
+    margin-bottom: 30px;
+}
+
+.recipe-instruction-header, .ingredient-header {
+    margin: 20px;
+    font-size: 20px;
+    font-family: 'Allan', cursive;
+    text-align: center;
+}
+
+.recipe-container {
+    border: 3px solid darkgoldenrod;
+    background-color: lightyellow;
+    margin: 40px;
+    text-align: center;
+    display:flex;
+    border-radius: 20px;
+    display: block;
+}
+
+.instruction-div {
+    width: 90%;
+    display: flex;
+    text-align: left;
+    margin-left: 30px;
+    font-size: 14px;
+    font-family: 'GFS Neohellenic', sans-serif;
+}
+
+.recipe-img {
+    margin: 20px;
+    border: 2px solid darkgray;
+    box-shadow: 2px 2px darkslategray;
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.recipe-header h1 {
+    color: #d7ceb2;
+	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	font: 50px 'BazarMedium';
+    letter-spacing: 10px;
+    text-align:center;
+}
+
+/* END OF RECIPE */
+>>>>>>> f6fc1ae903d54002ed5c1897ab781873d245371b
