@@ -78,6 +78,13 @@ body {
     transform: rotateY(180deg);
 }
 
+.recipe-card-title {
+
+    font-size: 15px;
+    text-align: center;
+    margin-top: 5px;
+}
+
 
 
 @-webkit-keyframes gradientBG {
