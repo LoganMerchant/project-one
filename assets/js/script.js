@@ -327,6 +327,7 @@ if(response.ok) {
         var img = data.results[recipeNum].image;
         var image = document.createElement("img");
         image.setAttribute("src", img);
+        image.setAttribute("width", "270px");
         var cardFront = document.querySelector("#recipe-front");
         cardFront.appendChild(image);
        var title = data.results[recipeNum].title;
