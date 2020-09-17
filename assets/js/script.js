@@ -359,6 +359,10 @@ if(response.ok) {
             //give them something american
             getRecipeList("American");
         }
+        else if(id === "undefined) {
+                //give them something European
+                getRecipeList("European")
+    }
         else {
         getRecipe(id);
         }
