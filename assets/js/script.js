@@ -182,6 +182,7 @@ const cuisines = {
 };
 
 var cuisine;
+var id;
 //on click on recipe, go to recipe.html
 $("#search").on("click", function (){
     //clear out card in case there's already something there
@@ -193,7 +194,6 @@ $("#search").on("click", function (){
            cuisine = value;
        }
    }
-    console.log(cuisine);
     getRecipeImage(cuisine);
 });
 //display an image on the front of the card
@@ -209,14 +209,23 @@ getRecipeImage = (cuisine) => {
 if(response.ok) {
     response.json().then(function(data) {
         console.log(data);
-        var img = data.results[0].image;
+        //get the number of results
+        var numResults = data.results.length;
+         recipeNum = Math.floor(Math.random() * length-1);
+        //don't allow it to be negative
+        if(recipeNum <0) {
+            recipeNum = 0;
+        }
+        //choose a random recipe
+        id = data.results[recipeNum].id;
+        var img = data.results[recipeNum].image;
         var image = document.createElement("img");
         image.setAttribute("src", img);
         console.log(img);
         var cardFront = document.querySelector("#recipe-front");
         cardFront.appendChild(image);
        console.log(cuisine);
-       var title = data.results[0].title;
+       var title = data.results[recipeNum].title;
        var recipeTitle = document.createElement("p");
        recipeTitle.setAttribute("class", "recipe-card-title");
        recipeTitle.textContent = title;
@@ -230,7 +239,7 @@ if(response.ok) {
 
 //on button click, open recipe.html, and append the query info
 $("#recipe-button").on("click", function(){
-    window.location = "recipes.html?=" + cuisine;
+    window.location = "recipes.html?id=" + id;
 });
 //end recipe card section
 
@@ -240,7 +249,7 @@ $("#recipe-button").on("click", function(){
 var container = document.querySelector("#container");
 
 var cuisine;
-
+/*
 getRecipeList = (cuisine) => {
     fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
         "method": "GET",
@@ -262,7 +271,7 @@ if(response.ok) {
 });
 
 };
-
+*/
 
     getRecipe = (id) => {
         fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/information", {
@@ -343,14 +352,12 @@ if(response.ok) {
     searchParam = () => {
         var paramString = window.location;
         var searchParams = new URLSearchParams(paramString);
-        var country = searchParams.get("search");
-        country = country.toString();
-       country = country.substring(2,country.length);
-        console.log(country);
-        getRecipeList(country);
+        var id = searchParams.get("search");
+        id = id.toString();
+       id = id.substring(4,id.length);
+        console.log(id);
+        getRecipe(id);
     };
-
-//searchParam();
 
 //end of recipe section
 
