@@ -43,6 +43,19 @@ body {
 .output-h2{
     font-size: 1ch;
 }
+#wiki-h1 {
+    padding: 30px;
+    color: black;
+    font-size: 3vw;
+    text-shadow: none;
+}
+#wiki-h2 {
+    text-shadow: none;
+    color: maroon;
+    font-size: 1.5vw;
+    padding: 30px;
+}
+
 
 
 .search-form {
