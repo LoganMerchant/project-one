@@ -1,4 +1,241 @@
-//Recipe section
+//Recipe Card Section
+
+const cuisines = {
+    "belarus": "Eastern European",
+    "ukraine" : "Eastern European",
+    "estonia" : "Eastern European",
+    "latvia" : "Eastern European",
+    "lithuania" : "Eastern European",
+    "moldova": "Eastern European",
+    "czech republic" : "European",
+    "benin" : "African",
+    "central african republic": "African",
+    "burundi" : "African",
+    "hungary" : "European",
+    "england": "British",
+    "britain": "British",
+    "scotland" : "British",
+    "wales" : "British",
+    "china" : "Chinese",
+    "italy" : "Italian",
+    "france": "French",
+    "vietnam": "Vietnamese",
+    "mexico" : "Mexican",
+    "america": "American",
+    "canada" : "American",
+    "US" : "American",
+    "georgia" : "Southern",
+    "florida" : "Southern",
+    "louisiana" : "Cajun",
+    "south carolina" : "Southern",
+    "north carolina" : "Southern",
+    "korea" : "Korean",
+    "greece" : "Greek",
+    "brasil" : "Latin American",
+    "peru" : "Latin American",
+    "chile" : "Latin American",
+    "south africa" : "African",
+    "botswana" : "African", 
+    "germany" : "German",
+    "denmark" : "Nordic",
+    "norway" : "Nordic",
+    "iceland" : "Nordic",
+    "greenland" : "Nordic",
+    "egypt" : "Mediterranean",
+    "spain" : "Spanish",
+    "japan" : "Japanese",
+    "indonesia" : "Asian",
+    "poland" : "Eastern European",
+    "russia" : "Eastern European",
+    "romania" : "Eastern European",
+    "slovakia" : "Eastern European",
+    "albania" : "Greek",
+    "montenegro" : "Mediterranean",
+    "el salvador" : "Latin American",
+    "honduras": "Latin American",
+    "costa rica" : "Latin American",
+    "belize" : "Caribbean",
+    "barbados": "Caribbean",
+    "bahamas" : "Caribbean",
+    "ecuador" : "Latin American",
+    "portugul" : "Spanish",
+    "jamaica" : "Caribbean",
+    "trinidad and tobago" : "Caribbean",
+    "virgin islands" : "Caribbean",
+    "bermuda" : "Caribbean",
+    "switzerland": "European",
+    "austria" : "German",
+    "cyprus" : "Greek",
+    "netherlands": "European",
+    "bulgaria" : "Eastern European",
+    "finland" : "Nordic",
+    "sweden" : "Nordic",
+    "slovenia": "Eastern European",
+    "ireland" : "Irish",
+    "israel" : "Jewish",
+    "india" : "Indian",
+    "pakistan" : "Indian",
+    "thailand" : "Thai",
+    "croatia" : "Eastern European",
+    "belgium" : "European",
+    "luxembourg" : "European",
+    "australia" : "British",
+    "new zealand" : "British",
+    "nigeria" : "African",
+    "angola" : "African",
+    "ethiopia" : "African",
+    "tanzania" : "African",
+    "kenya" : "African",
+    "uganda" : "African",
+    "algeria" : "Mediterranean",
+    "afghanistan" : "Middle Eastern",
+    "chad" : "African",
+    "morocco" : "Mediterranean",
+    "sudan" : "Middle Eastern",
+    "yemen" : "Middle Eastern",
+    "oman" : "Middle Eastern",
+    "niger" : "African",
+    "democratic republic of congo" : "African",
+    "congo": "African",
+    "mozambique" : "African",
+    "ghana" : " African",
+    "côte d'ivoire" : "African",
+    "ivory coast" : "African",
+    "burkina faso" : "African",
+    "mali" : "Middle Eastern",
+    "malawi": "African",
+    "zambia" : "African",
+    "somolia" : "Middle Eastern",
+    "zimbabwe" : "African",
+    "rwanda" : "African",
+    "togo" : "African",
+    "sierra leone" : "African",
+    "namibia" : "African",
+    "eritrea" : "African",
+    "gambia" : "African",
+    "gabon" : "African",
+    "seychelles" : "French",
+    "eswatini" : "African",
+    "libya" : "African",
+    "equitorial guinea" : "African",
+    "cabo verde" : "Spanish",
+    "capo verde" : "Cajun",
+    "réunion" : "French",
+    "reunion" : "French",
+    "guatamala" : "Latin American",
+    "nicaragua" : "Latin American",
+    "panama" : "Latin American",
+    "argentina" : "Latin American",
+    "bolivia" : "Latin American",
+    "columbia" : "Latin American",
+    "guyana" : "Latin American",
+    "paraguay" : "Latin American",
+    "uruguay" : "Latin American",
+    "venezuala" : "Latin American",
+    "tunesia" : "Mediterranean",
+    "cuba" : "Caribbean",
+    "haiti" : "Caribbean",
+    "dominican republic": "Caribbean",
+    "puerto rico" : "Caribbean",
+    "bangladesh" : "Asian",
+    "philippines" : "Asian",
+    "suriname" : "latin american",
+    "turkey" : "Middle Eastern",
+    "iraq" : "Middle Eastern",
+    "iran" : "Middle Eastern",
+    "saudi srabia" : "Middle Eastern",
+    "western sahara" : "African",
+    "mayotte" : "African",
+    "cameroon" : "African",
+    "asia" : "Asian",
+    "africa" : "African",
+    "latin america" : "Latin American",
+    "malaysia" : "Asian",
+    "myanmar" : "Asian",
+    "uzbekistan" : "Middle Eastern",
+    "kazakhstan" : "Middle Eastern",
+    "tajikistan" : "Middle Eastern",
+    "united arab emirates" : "Middle Eastern",
+    "qatar" : "Middle Eastern",
+    "maldives" : "asian",
+    "laos" : "Asian",
+    "nepal" : "Indian",
+    "north korea" : "Korean",
+    "south korea" : "Korean",
+    "sri lanka" : "Asian",
+    "syria" : "Middle Eastern",
+    "cambodia" : "Asian",
+    "lebanon" : "Mediterranean",
+    "aruba" : "Caribbean",
+    "singapore" : "Asian",
+    "mongolia" : "Asian",
+    "kuwait" : "Middle Eastern",
+    "jordan" : "Middle Eastern",
+    "armenia" : "Eastern European",
+    "bahrain" : "Middle Eastern",
+    "brunei" : "Middle Eastern",
+    "taiwan" : "Chinese",
+    "hong kong" : "Chinese",
+    "macao" : "Chinese",
+    "bali" : "Chinese",
+    "senegal" : "African"
+};
+
+var cuisine;
+//on click on recipe, go to recipe.html
+$("#search").on("click", function (){
+    //clear out card in case there's already something there
+    $("#recipe-front").innerHTML = "";
+    var searchText = $("#country").val();
+    searchText = searchText.toLowerCase();
+   for (const[key,value] of Object.entries(cuisines)) {
+       if(searchText === key) {
+           cuisine = value;
+       }
+   }
+    console.log(cuisine);
+    getRecipeImage(cuisine);
+});
+//display an image on the front of the card
+
+getRecipeImage = (cuisine) => {
+    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
+        }
+    }).then(response => {
+if(response.ok) {
+    response.json().then(function(data) {
+        console.log(data);
+        var img = data.results[0].image;
+        var image = document.createElement("img");
+        image.setAttribute("src", img);
+        console.log(img);
+        var cardFront = document.querySelector("#recipe-front");
+        cardFront.appendChild(image);
+       console.log(cuisine);
+       var title = data.results[0].title;
+       var recipeTitle = document.createElement("p");
+       recipeTitle.setAttribute("class", "recipe-card-title");
+       recipeTitle.textContent = title;
+       cardFront.appendChild(recipeTitle);
+
+    })
+}
+});
+
+};
+
+//on button click, open recipe.html, and append the query info
+$("#recipe-button").on("click", function(){
+    window.location = "recipes.html?=" + cuisine;
+});
+//end recipe card section
+
+
+//Recipe page section
 
 var container = document.querySelector("#container");
 
