@@ -834,7 +834,7 @@ var displayPlaylist = function (data) {
 
 // Checks to see if user has an access token for Spotify
 var tokenCheck = function() {
-    searchedCountry = sessionStorage.getItem("searchTerm");
+    searchedCountry = localStorage.getItem("searchTerm");
     // Pulls any token saved in sessionStorage
     var savedToken = sessionStorage.getItem("token");
     // Finds any hash fragments with in the url.
@@ -870,7 +870,7 @@ if (window.location.toString().includes('music.html')) {
 // Homepage Flag
 var displayFlag = function() {
     var searchTerm = $('.search-form input').val();
-    sessionStorage.setItem('searchTerm', searchTerm);
+    localStorage.setItem('searchTerm', searchTerm);
     var formattedCountry = searchTerm.toLowerCase().split(" ");
 
     for (var i = 0; i < formattedCountry.length; i++) {
