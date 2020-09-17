@@ -209,7 +209,6 @@ getRecipeImage = (cuisine) => {
     }).then(response => {
 if(response.ok) {
     response.json().then(function(data) {
-        console.log(data);
         //get the number of results
         var numResults = data.results.length;
          recipeNum = Math.floor(Math.random() * numResults-1);
@@ -222,10 +221,8 @@ if(response.ok) {
         var img = data.results[recipeNum].image;
         var image = document.createElement("img");
         image.setAttribute("src", img);
-        console.log(img);
         var cardFront = document.querySelector("#recipe-front");
         cardFront.appendChild(image);
-       console.log(cuisine);
        var title = data.results[recipeNum].title;
        var recipeTitle = document.createElement("p");
        recipeTitle.setAttribute("class", "recipe-card-title");
@@ -250,7 +247,7 @@ $("#recipe-button").on("click", function(){
 var container = document.querySelector("#container");
 
 var cuisine;
-/*
+//if no id is given, we can still display a recipe
 getRecipeList = (cuisine) => {
     fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
         "method": "GET",
@@ -261,18 +258,16 @@ getRecipeList = (cuisine) => {
     }).then(response => {
 if(response.ok) {
     response.json().then(function(data) {
-        console.log(data);
-        console.log(data.results[0].id, data.results[0].title);
-        var title = document.querySelector("#title");
-        title.textContent += " " + data.results[0].title;
-        id = data.results[0].id;
+        var numResults = data.results.length;
+        var recipeNum = Math.floor(Math.random() * numResults -1);
+        id = data.results[recipeNum].id;
        getRecipe(id);
     })
 }
 });
 
 };
-*/
+
 
     getRecipe = (id) => {
         fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/information", {
@@ -359,8 +354,13 @@ if(response.ok) {
         var id = searchParams.get("search");
         id = id.toString();
        id = id.substring(4,id.length);
-        console.log(id);
+        if(!id) {
+            //give them something american
+            getRecipeList("American");
+        }
+        else {
         getRecipe(id);
+        }
     };
 
 //end of recipe section
