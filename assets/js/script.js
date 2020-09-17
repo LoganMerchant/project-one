@@ -36,7 +36,7 @@ function getNews() {
       //getting the info from NYT
       console.log(data);
 
-      var newsImg = document.querySelector("#news-img");
+      var newsImg = document.querySelector(".news-img");
       var pictureDisplay = document.createElement("img");
       var headline = data.response.docs[0]?.headline?.main;
       var firstPara = data.response.docs[0]?.lead_paragraph;
@@ -53,19 +53,19 @@ function getNews() {
         );
         newsImg.appendChild(pictureDisplay);
 
-        pictureDisplay.setAttribute("width", 300);
+        pictureDisplay.setAttribute("width", 130);
       }
 
       //displaying the items from NYT
-      $("#news-img").html("");
-      $("#output-h1").html("");
-      $("#output-h2").html("");
+      $(".news-img").html("");
+      $(".output-h1").html("");
+      $(".output-h2").html("");
       $(".nyt-link").html("");
 
       // $("#news-img").append(newsImg);
       newsImg.appendChild(pictureDisplay);
-      $("#output-h1").append(headline);
-      $("#output-h2").append(firstPara);
+      $(".output-h1").append(headline);
+      $(".output-h2").append(firstPara);
       $(".nyt-link").html(
         `<a href="${nytLink}/" target="_blank">Read Article</a>`
       );
