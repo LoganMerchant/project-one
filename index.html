@@ -44,9 +44,9 @@
   <h3>What country would you like to visit?</h3>
   <!--<select name="genre-selector" id="rating">-->
   <div class="search-form">
-    <input type="text" placeholder="Search Countries">
+    <input type="text" id="country" placeholder="Search Countries">
   </div>
-  <button class="button large rounded drop-shadow" onclick="myFunction()">Search!</button>
+  <button class="button large rounded drop-shadow" id="search" onclick="myFunction()">Search!</button>
 </div>
 
 
@@ -56,10 +56,10 @@
       <div class="card cell">
         <div class="recipes-container">
         <div class="card-inner">
-          <div class="card-front"></div>     
+          <div class="card-front" id="recipe-front></div>     
           <div class="card-back">
-            <a href="./recipes.html">
-              <button class="button dark rounded drop-shadow">Recipes</button>
+            <a href="#">
+              <button class="button dark rounded drop-shadow" id="recipe-button>Recipes</button>
             </a>
           </div>
         </div>
