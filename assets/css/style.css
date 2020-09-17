@@ -34,14 +34,19 @@ body {
 	letter-spacing: 10px;
 
 }
-.input-group{
-    margin: auto;
+
+.search-form {
+	width: 50%;
+	margin: auto;
 }
+
 .output-h1{
     font-size: 1vw bold;
+    color: black;
 }
 .output-h2{
     font-size: 1ch;
+    color: black;
 }
 #wiki-h1 {
     padding: 30px;
@@ -54,13 +59,6 @@ body {
     color: maroon;
     font-size: 1.5vw;
     padding: 30px;
-}
-
-
-
-.search-form {
-	width: 50%;
-	margin: auto;
 }
 
 .card {
@@ -91,7 +89,7 @@ body {
 }
 
 .card-front {
-    background-color: none;
+    background-color: darkgray;
     color: salmon;
 }
 
@@ -99,6 +97,13 @@ body {
     background-color: salmon;
     color: darkgray;
     transform: rotateY(180deg);
+}
+
+.recipe-card-title {
+
+    font-size: 15px;
+    text-align: center;
+    margin-top: 5px;
 }
 
 

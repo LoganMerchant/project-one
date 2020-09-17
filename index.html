@@ -68,45 +68,44 @@
 
         <div class="search-container">
           <h3>What country would you like to visit?</h3>
-          <div class="input-group col-6">
+          <!--<select name="genre-selector" id="rating">-->
+
+          <div class="search-form input-group col-6">
             <input
               type="text"
               class="form-control"
-              placeholder="search"
+              id="country"
+              placeholder="Search Countries"
               aria-label="Query Search"
               aria-describedby="button-addon2"
             />
             <div class="input-group-append">
-              <button
-                class="btn btn-outline-light"
-                type="button"
-                id="button-addon2"
-              >
-                Go!
-              </button>
-            </div>
-          </div>
-          <!--<select name="genre-selector" id="rating">-->
-          <!-- <div class="search-form">
-            <input type="text" placeholder="Search Countries" />
-          </div>
+          
           <button
-            class="button large rounded drop-shadow"
-            onclick="myFunction()"
+            class="btn btn-outline-light"
+            type="button"
+            id="search button-addon2"
+            onclick="displayFlag()"
           >
             Search!
-          </button> -->
+          </button>
+          </div>
         </div>
+
+        <div id="country-flag"></div>
 
         <div class="grid">
           <div class="row">
             <div class="card cell">
               <div class="recipes-container">
                 <div class="card-inner">
-                  <div class="card-front"></div>
+                  <div class="card-front" id="recipe-front"></div>
                   <div class="card-back">
-                    <a href="./recipes.html">
-                      <button class="button dark rounded drop-shadow">
+                    <a href="#">
+                      <button
+                        class="button dark rounded drop-shadow"
+                        id="recipe-button"
+                      >
                         Recipes
                       </button>
                     </a>
@@ -133,16 +132,21 @@
             </div>
 
             <div class="card cell">
-              <div class="music-container">
-                <div class="card-inner">
-                  <div class="card-front"></div>
-                  <div class="card-back">
-                    <a href="./music.html">
-                      <button class="button dark rounded drop-shadow">
-                        Music
-                      </button>
-                    </a>
+              <div class="card-inner">
+                <div class="card-front">
+                  <div class="img-container">
+                    <img src="./assets/images/music.gif" />
                   </div>
+                </div>
+                <div class="card-back">
+                  <a href="./music.html">
+                    <button
+                      class="button dark rounded drop-shadow"
+                      onclick="tokenCheck()"
+                    >
+                      Music
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -166,6 +170,7 @@
         </div>
       </div>
     </main>
+
     <div id="response-header"></div>
     <div id="response-container"></div>
     <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
