@@ -211,7 +211,7 @@ if(response.ok) {
         console.log(data);
         //get the number of results
         var numResults = data.results.length;
-         recipeNum = Math.floor(Math.random() * length-1);
+         recipeNum = Math.floor(Math.random() * numResults-1);
         //don't allow it to be negative
         if(recipeNum <0) {
             recipeNum = 0;
