@@ -285,6 +285,9 @@ if(response.ok) {
         if(response.ok) {
             response.json().then(function(data){ 
                 console.log(data);
+                //add in title
+                var title = document.querySelector("#title");
+                title.textContent += " " + data.title;
                //put the description in
                var desc = data.summary;
                var description = document.createElement("h4");
