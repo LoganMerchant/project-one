@@ -290,7 +290,7 @@ const cuisines = {
 var cuisine;
 var id;
 //on click on recipe, go to recipe.html
-$("#search").on("click", function (){
+$("#button-addon2").on("click", function (){
     //clear out card in case there's already something there
     var frontCard = document.querySelector("#recipe-front");
    frontCard.innerHTML="";
