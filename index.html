@@ -46,9 +46,10 @@
   <div class="search-form">
     <input type="text" id="country" placeholder="Search Countries">
   </div>
-  <button class="button large rounded drop-shadow" id="search" onclick="myFunction()">Search!</button>
+  <button class="button large rounded drop-shadow" id="search" onclick="displayFlag()">Search!</button>
 </div>
 
+<div id="country-flag"></div>
 
 <div class="grid">
   <div class="row">
@@ -80,15 +81,17 @@
       </div>
 
       <div class="card cell">
-        <div class="music-container">
         <div class="card-inner">
-          <div class="card-front"></div>     
+          <div class="card-front">      
+            <div class="img-container">
+              <img src="./assets/images/music.gif">
+            </div>
+          </div>     
           <div class="card-back">
             <a href="./music.html">
               <button class="button dark rounded drop-shadow">Music</button>
             </a>
           </div>
-        </div>
         </div>
       </div>
 
