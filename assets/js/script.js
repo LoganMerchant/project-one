@@ -121,7 +121,6 @@ if(response.ok) {
 
 var playlistContainerEl = document.querySelector(".music-container");
 var welcomeEl = document.querySelector("#welcome");
-var searchedCountry = 'united kingDom';
 
 // Used to convert a user's search into a country code.
 var countryCodesObj = {
@@ -477,6 +476,7 @@ var displayPlaylist = function (data) {
 
 // Checks to see if user has an access token for Spotify
 var tokenCheck = function() {
+    searchedCountry = sessionStorage.getItem("searchTerm");
     // Pulls any token saved in sessionStorage
     var savedToken = sessionStorage.getItem("token");
     // Finds any hash fragments with in the url.
@@ -485,7 +485,7 @@ var tokenCheck = function() {
     // If there is no token in sessionStorage and there is no hash fragment with an access token...
     if (!savedToken && !receivedToken) {
         // Redirect the user to Spotify's authorization page.
-        // spotifyUserAuthorization();
+        spotifyUserAuthorization();
     // If there is a hash fragment with an access token...
     } else if (receivedToken.includes("access_token=")) {
         // Isolate the access token in it's own string...
@@ -500,16 +500,19 @@ var tokenCheck = function() {
     };
     // Verifies that a token is being set for this script. 
     console.log("Token set as: " + token);
-    // getCountryCode(searchedCountry);
+    getCountryCode(searchedCountry);
 };
 
-tokenCheck();
+if (window.location.toString().includes('music.html')) {
+    tokenCheck();
+};
 
 // !!!!! END OF MUSIC SECTION !!!!!
 
 // Homepage Flag
 var displayFlag = function() {
     var searchTerm = $('.search-form input').val();
+    sessionStorage.setItem('searchTerm', searchTerm);
     var formattedCountry = searchTerm.toLowerCase().split(" ");
 
     for (var i = 0; i < formattedCountry.length; i++) {
@@ -538,3 +541,5 @@ var displayFlag = function() {
     countryFlagEl.innerHTML = "";
     countryFlagEl.appendChild(countryFlagImg);
 };
+
+// End of Homepage Flag
