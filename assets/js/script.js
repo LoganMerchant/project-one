@@ -500,9 +500,41 @@ var tokenCheck = function() {
     };
     // Verifies that a token is being set for this script. 
     console.log("Token set as: " + token);
+    // getCountryCode(searchedCountry);
 };
 
 tokenCheck();
-getCountryCode(searchedCountry);
 
 // !!!!! END OF MUSIC SECTION !!!!!
+
+// Homepage Flag
+var displayFlag = function() {
+    var searchTerm = $('.search-form input').val();
+    var formattedCountry = searchTerm.toLowerCase().split(" ");
+
+    for (var i = 0; i < formattedCountry.length; i++) {
+        // For each word(index), capitalize the first letter and keep the rest as lowercase
+        formattedCountry[i] = formattedCountry[i].charAt(0).toUpperCase() + formattedCountry[i].substring(1);
+    };
+
+    // Joins each of the indexes together and puts whitespace between them
+    formattedCountry = formattedCountry.join(" ");
+
+    var keys = Object.keys(countryCodesObj);
+
+    searchTerm = searchTerm.toUpperCase();
+
+    if (!keys.includes(searchTerm)) {
+        searchTerm = keys.find(function(key) {
+            return countryCodesObj[key] === formattedCountry;
+        });
+    };
+    
+    searchTerm = searchTerm.toLowerCase();
+    
+    var countryFlagEl = document.querySelector("#country-flag");
+    var countryFlagImg = document.createElement("img");
+    countryFlagImg.setAttribute("src", "https://flagcdn.com/h240/" + searchTerm + ".png");
+    countryFlagEl.innerHTML = "";
+    countryFlagEl.appendChild(countryFlagImg);
+};
