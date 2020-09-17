@@ -51,7 +51,7 @@ function getNews() {
           "https://www.nytimes.com/" +
             data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
         );
-        newsImg.appendChild(pictureDisplay);
+        // newsImg.appendChild(pictureDisplay);
 
         pictureDisplay.setAttribute("width", 130);
       }

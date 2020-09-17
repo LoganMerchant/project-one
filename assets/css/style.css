@@ -38,7 +38,7 @@ body {
     margin: auto;
 }
 .output-h1{
-    font-size: 2vw;
+    font-size: 1vw bold;
 }
 .output-h2{
     font-size: 1ch;
@@ -78,7 +78,7 @@ body {
 }
 
 .card-front {
-    background-color: darkgray;
+    background-color: none;
     color: salmon;
 }
 
