@@ -1,6 +1,107 @@
-body {
+* {
     box-sizing: border-box;
 }
+/** Code By Webdevtrick ( https://webdevtrick.com ) **/
+body {
+	margin: 0;
+	width: 100%;
+	height: 100vh;
+	font-family: "Exo", sans-serif;
+	color: #fff;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab );
+	background-size: 400% 400%;
+	-webkit-animation: gradientBG 10s ease infinite;
+	        animation: gradientBG 10s ease infinite;
+}
+.container {
+	width: 100%;
+	position: absolute;
+	top: 35%;
+	text-align: center;
+}
+
+.container h1, h2 {
+    color: #d7ceb2;
+	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	font: 80px 'BazarMedium';
+	letter-spacing: 10px;
+}
+
+.search-container h3 {
+	color: #d7ceb2;
+	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	font: 40px 'BazarMedium';
+	letter-spacing: 10px;
+
+}
+
+.search-form {
+	width: 50%;
+	margin: auto;
+}
+
+.card {
+    background-color: lightgray;
+    width: 200px;
+    height: 300px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+   
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    background-color: darkgray;
+    color: salmon;
+}
+
+.card-back {
+    background-color: salmon;
+    color: darkgray;
+    transform: rotateY(180deg);
+}
+
+@-webkit-keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* BEGINNING OF RECIPE */
 
 .recipe-div {
     margin: 20px;
@@ -55,7 +156,6 @@ body {
     display:flex;
     border-radius: 20px;
     display: block;
-
 }
 
 .instruction-div {
@@ -76,4 +176,13 @@ body {
     max-height: 300px;
     max-width: 300px;
 }
-      
+
+.recipe-header h1 {
+    color: #d7ceb2;
+	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	font: 50px 'BazarMedium';
+    letter-spacing: 10px;
+    text-align:center;
+}
+
+/* END OF RECIPE */
