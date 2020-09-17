@@ -187,7 +187,8 @@ var id;
 //on click on recipe, go to recipe.html
 $("#search").on("click", function (){
     //clear out card in case there's already something there
-    $("#recipe-front").innerHTML = "";
+    var frontCard = document.querySelector("#recipe-front");
+   frontCard.innerHTML="";
     var searchText = $("#country").val();
     searchText = searchText.toLowerCase();
    for (const[key,value] of Object.entries(cuisines)) {
