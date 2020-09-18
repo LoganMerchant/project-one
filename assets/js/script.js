@@ -771,7 +771,7 @@ var getCountryCode = function(searchedCountry) {
 var spotifyUserAuthorization = function() {
     authorizeUri = 'https://accounts.spotify.com/authorize?client_id=c3f150a666754143adc77d0704da8ebf&response_type=token' +
     // !!!! THIS URI REDIRECT NEEDS TO CHANGE TO THE DEPLOYED APPLICATION !!!!
-    '&redirect_uri=https://loganmerchant.github.io/scratching-your-travel-itch/music.html/';
+    '&redirect_uri=https://loganmerchant.github.io/scratching-your-travel-itch/music.html/callback';
     location.replace(authorizeUri);
 };
 
