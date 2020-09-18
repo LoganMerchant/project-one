@@ -862,7 +862,7 @@ var tokenCheck = function() {
     getCountryCode(searchedCountry);
 };
 
-if (window.location.toString().includes('music.html')) {
+if (window.location.toString().includes('scratching-your-travel-itch/')) {
     tokenCheck();
 };
 
