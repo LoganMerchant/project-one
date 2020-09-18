@@ -862,9 +862,7 @@ var tokenCheck = function() {
     getCountryCode(searchedCountry);
 };
 
-if (window.location.toString().includes('scratching-your-travel-itch/')) {
-    tokenCheck();
-};
+tokenCheck();
 
 // !!!!! END OF MUSIC SECTION !!!!!
 
