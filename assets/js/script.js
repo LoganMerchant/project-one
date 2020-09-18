@@ -853,6 +853,7 @@ var tokenCheck = function() {
         sessionStorage.setItem("token", receivedToken);
         // Set the global var of `token` to match the isolated token.
         token = receivedToken;
+        location.reload;
     } else {
         // Set the global var of `token` to match the token in sessionStorage.
         token = savedToken;
@@ -860,6 +861,10 @@ var tokenCheck = function() {
     // Verifies that a token is being set for this script. 
     console.log("Token set as: " + token);
     getCountryCode(searchedCountry);
+};
+
+if (window.location.toString().includes('scratching-your-travel-itch')) {
+    tokenCheck();
 };
 
 // !!!!! END OF MUSIC SECTION !!!!!
@@ -898,4 +903,3 @@ var displayFlag = function() {
 };
 
 // End of Homepage Flag
-tokenCheck();
