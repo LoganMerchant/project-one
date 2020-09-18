@@ -853,7 +853,7 @@ var tokenCheck = function() {
         sessionStorage.setItem("token", receivedToken);
         // Set the global var of `token` to match the isolated token.
         token = receivedToken;
-        location.replace('https://loganmerchant.github.io/scratching-your-travel-itch/music.html');
+        window.location.replace('https://loganmerchant.github.io/scratching-your-travel-itch/music.html');
     } else {
         // Set the global var of `token` to match the token in sessionStorage.
         token = savedToken;
@@ -863,7 +863,7 @@ var tokenCheck = function() {
     getCountryCode(searchedCountry);
 };
 
-if (window.location.toString().includes('music.html' || '#')) {
+if (window.location.toString().includes('music.html') || window.location.hash > 0) {
     tokenCheck();
 };
 
