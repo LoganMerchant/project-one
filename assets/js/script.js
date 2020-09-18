@@ -862,8 +862,6 @@ var tokenCheck = function() {
     getCountryCode(searchedCountry);
 };
 
-tokenCheck();
-
 // !!!!! END OF MUSIC SECTION !!!!!
 
 // Homepage Flag
@@ -900,3 +898,4 @@ var displayFlag = function() {
 };
 
 // End of Homepage Flag
+tokenCheck();
