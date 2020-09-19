@@ -1,3 +1,4 @@
+// <!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. © Copyright The Dangling Blobs-->
 const cuisines = {
     "belarus": "Eastern European",
     "ukraine" : "Eastern European",
@@ -182,7 +183,6 @@ const cuisines = {
     "bali" : "Chinese",
     "senegal" : "African"
 };
-
 var countryCodesObj = {
     "BD": "Bangladesh",
     "BE": "Belgium",
@@ -443,13 +443,11 @@ var key = `pZwZYOOhZZTfRVT0WHKsRuANSpS6D0wl`;
 var nytInfo = document.querySelector(".nyt-info");
 // click on button
 //NYT Section
-
 $(button).on("click", function (event) {
   event.preventDefault();
 
   searchInfo = $(".form-control").val();
   $("form-control").empty();
-
   searchInfo = searchInfo.toLowerCase();
 
   // make sure to enter a valid search item
@@ -490,7 +488,7 @@ if (searchInfo === 'uae') {
   if (searchInfo === "" || (matchedCuisineSearch() === false && matchedCodeSearch() === false)) {
     //alert("input a country please");
     $("#no-country").modal();
-  } else {
+   } else {
     list.push(searchInfo);
     localStorage.setItem("headlines", JSON.stringify(list));
 
@@ -512,8 +510,11 @@ function getNews() {
     .then(function (data) {
       //getting the info from NYT
       console.log(data);
-
-      var newsImg = document.querySelector(".news-img");
+      var newsGif = document.querySelector("#news-gif");
+      newsGif.remove();
+      var wikiGif = document.querySelector('#wiki-gif');
+      wikiGif.remove();
+      var newsImg = document.querySelector("#news-img");
       var pictureDisplay = document.createElement("img");
       var headline = data.response.docs[0]?.headline?.main;
       var firstPara = data.response.docs[0]?.lead_paragraph;
@@ -529,21 +530,23 @@ function getNews() {
             data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
         );
         // newsImg.appendChild(pictureDisplay);
+        
 
         pictureDisplay.setAttribute("width", 130);
       }
+    //   console.log(newsImg)
 
       //displaying the items from NYT
-      $(".news-img").html("");
-      $(".output-h1").html("");
-      $(".output-h2").html("");
-      $(".nyt-link").html("");
+      $("#news-img").html("");
+      $("#output-h1").html("");
+      $("#output-h2").html("");
+      $("#nyt-link").html("");
 
-      // $("#news-img").append(newsImg);
+      $("#news-img").append(newsImg);
       newsImg.appendChild(pictureDisplay);
-      $(".output-h1").append(headline);
-      $(".output-h2").append(firstPara);
-      $(".nyt-link").html(
+      $("#output-h1").append(headline);
+      $("#output-h2").append(firstPara);
+      $("#nyt-link").html(
         `<a href="${nytLink}/" target="_blank">Read Article</a>`
       );
     });
@@ -579,44 +582,86 @@ function wikiInfo() {
     });
 }
 
+
+//Country Image section
+var countryImage = document.querySelector("#country-image");
+
+getCountryImage = () => {
+    var searchText = $("#country").val();
+    searchText = searchText.toLowerCase();
+    fetch("https://bing-image-search1.p.rapidapi.com/images/search?q=" + searchText, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "bing-image-search1.p.rapidapi.com",
+		"x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
+	}
+}).then(response => {
+    if(response.ok) {
+        response.json().then(function(data) {
+            //get the number of results
+            console.log(data);
+            var image = data.value[0].contentUrl;
+            var img = document.createElement("img");
+            img.setAttribute("class", "country-image");
+            img.setAttribute("id", "ctryImg")
+            img.setAttribute("src", image);
+            img.setAttribute("height", "240px");
+            countryImage.appendChild(img);
+        })
+    }
+})
+.catch(err => {
+	console.log(err);
+});
+}
 //Recipe section
 //Recipe Card Section
 
 var cuisine;
 var id;
 //on click on recipe, go to recipe.html
-$("#button-addon2").on("click", function (){
-    //clear out card in case there's already something there
-    var frontCard = document.querySelector("#recipe-front");
-   frontCard.innerHTML="";
-    var searchText = $("#country").val();
-    searchText = searchText.toLowerCase();
-    console.log(searchText);
-   for (const[key,value] of Object.entries(cuisines)) {
-       if(searchText === key) {
-           cuisine = value;
-       }
-   }
-    getRecipeImage(cuisine);
+$("#button-addon2").on("click", function () {
+//clear out country-image incase there's something already there
+var img = document.querySelector("#ctryImg");
+if(img) {
+img.remove();
+}
+  //clear out card in case there's already something there
+  var frontCard = document.querySelector("#recipe-front");
+  frontCard.innerHTML = "";
+  var searchText = searchInfo;
+  searchText = searchText.toLowerCase();
+  for (const [key, value] of Object.entries(cuisines)) {
+    if (searchText === key) {
+      cuisine = value;
+    }
+  }
+  getCountryImage();
+  getRecipeImage(cuisine);
 });
 //display an image on the front of the card
-
+//also, display country image
 getRecipeImage = (cuisine) => {
-    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
-        }
-    }).then(response => {
-if(response.ok) {
-    response.json().then(function(data) {
+  fetch(
+    "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" +
+      cuisine,
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host":
+          "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a",
+      },
+    }
+  ).then((response) => {
+    if (response.ok) {
+      response.json().then(function (data) {
         //get the number of results
         var numResults = data.results.length;
-         recipeNum = Math.floor(Math.random() * numResults-1);
+        recipeNum = Math.floor(Math.random() * numResults - 1);
         //don't allow it to be negative
-        if(recipeNum <0) {
-            recipeNum = 0;
+        if (recipeNum < 0) {
+          recipeNum = 0;
         }
         //choose a random recipe
         id = data.results[recipeNum].id;
@@ -626,24 +671,21 @@ if(response.ok) {
         image.setAttribute("width", "270px");
         var cardFront = document.querySelector("#recipe-front");
         cardFront.appendChild(image);
-       var title = data.results[recipeNum].title;
-       var recipeTitle = document.createElement("p");
-       recipeTitle.setAttribute("class", "recipe-card-title");
-       recipeTitle.textContent = title;
-       cardFront.appendChild(recipeTitle);
-
-    })
-}
-});
-
+        var title = data.results[recipeNum].title;
+        var recipeTitle = document.createElement("p");
+        recipeTitle.setAttribute("class", "recipe-card-title");
+        recipeTitle.textContent = title;
+        cardFront.appendChild(recipeTitle);
+      });
+    }
+  });
 };
 
 //on button click, open recipe.html, and append the query info
-$("#recipe-button").on("click", function(){
-    window.location = "recipes.html?id=" + id;
+$("#recipe-button").on("click", function () {
+  window.location = "recipes.html?id=" + id;
 });
 //end recipe card section
-
 
 //Recipe page section
 
@@ -652,123 +694,129 @@ var container = document.querySelector("#container");
 var cuisine;
 //if no id is given, we can still display a recipe
 getRecipeList = (cuisine) => {
-    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
-        }
-    }).then(response => {
-if(response.ok) {
-    response.json().then(function(data) {
+  fetch(
+    "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" +
+      cuisine,
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host":
+          "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a",
+      },
+    }
+  ).then((response) => {
+    if (response.ok) {
+      response.json().then(function (data) {
         var numResults = data.results.length;
-        var recipeNum = Math.floor(Math.random() * numResults -1);
+        var recipeNum = Math.floor(Math.random() * numResults - 1);
         id = data.results[recipeNum].id;
-       getRecipe(id);
-    })
-}
-});
-
+        getRecipe(id);
+      });
+    }
+  });
 };
 
-
-    getRecipe = (id) => {
-        fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/information", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
-        }
-    })
-    .then(response => { 
-        if(response.ok) {
-            response.json().then(function(data){ 
-                console.log(data);
-                //add in title
-                var title = document.querySelector("#title");
-                title.textContent += " " + data.title;
-               //put the description in
-               var desc = data.summary;
-               var description = document.createElement("h4");
-               description.setAttribute("class", "recipe-description");
-               description.innerHTML = desc;
-               container.appendChild(description);
-               var ingTitle = document.createElement("p");
-               ingTitle.setAttribute("class", "ingredient-header");
-               ingTitle.textContent = "Ingredients";
-               container.appendChild(ingTitle);
-               //create a new container for the ingredients, and image
-               var ingDiv = document.createElement("div");
-               ingDiv.setAttribute("class", "recipe-div");
-               var imgLink = data.image;
-               var img = document.createElement("img");
-               img.setAttribute("class", "recipe-img");
-               img.setAttribute("src", imgLink);
-               ingDiv.appendChild(img);
-               var list1Div = document.createElement("div");
-                list1Div.setAttribute("class", "recipe-ingredients");
-                var list2Div = document.createElement("div");
-                list2Div.setAttribute("class", "recipe-ingredients"); //extendedIngredients[0].originalString
-                var ingList = data.extendedIngredients;
-                var list1 = document.createElement("ul");
-                list1.setAttribute("class", "recipe-ingredients");
-                var numRows = Math.ceil(ingList.length / 2);
-                for(var i = 0; i< numRows; i++) {
-                    var item = document.createElement("li");
-                    item.textContent = ingList[i].originalString;
-                    list1Div.appendChild(item);
-                }
-                ingDiv.appendChild(list1Div);
-                for(i = numRows + 1; i<ingList.length; i++) {
-                    var item1 = document.createElement("li");
-                    item1.textContent = ingList[i].originalString;
-                    list2Div.appendChild(item1);
-                }
-                ingDiv.appendChild(list2Div);
-                container.appendChild(ingDiv);
-                var insTitle = document.createElement("p");
-                insTitle.setAttribute("class", "recipe-instruction-header");
-                insTitle.textContent ="Instructions";
-                container.appendChild(insTitle);
-                var inst = data.analyzedInstructions[0].steps; //analyzedInstructions[0].steps[0].step
-                var instructionDiv = document.createElement("div");
-                var insList = document.createElement("ul");
-               // insList.setAttribute("class", )
-                instructionDiv.setAttribute("class", "instruction-div");
-                for(i=0; i<inst.length; i++) {
-                    var instruction = document.createElement("li");
-                    instruction.textContent=inst[i].step;
-                    insList.appendChild(instruction);
-                }
-                instructionDiv.appendChild(insList);
-                container.appendChild(instructionDiv);
-
-            });
-        }
-    })
-    .catch(err => {
-        console.log(err);
-    });
-    }; 
-
-    searchParam = () => {
-        var paramString = window.location;
-        var searchParams = new URLSearchParams(paramString);
-        var id = searchParams.get("search");
-        id = id.toString();
-       id = id.substring(4,id.length);
-        if(!id) {
-            //give them something american
-            getRecipeList("American");
-        }
-        else if(id === "undefined") {
-                //give them something European
-                getRecipeList("European")
+getRecipe = (id) => {
+  fetch(
+    "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" +
+      id +
+      "/information",
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host":
+          "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a",
+      },
     }
-        else {
-        getRecipe(id);
-        }
-    };
+  )
+    .then((response) => {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          //add in title
+          var title = document.querySelector("#title");
+          title.textContent += " " + data.title;
+          //put the description in
+          var desc = data.summary;
+          var description = document.createElement("h4");
+          description.setAttribute("class", "recipe-description");
+          description.innerHTML = desc;
+          container.appendChild(description);
+          var ingTitle = document.createElement("p");
+          ingTitle.setAttribute("class", "ingredient-header");
+          ingTitle.textContent = "Ingredients";
+          container.appendChild(ingTitle);
+          //create a new container for the ingredients, and image
+          var ingDiv = document.createElement("div");
+          ingDiv.setAttribute("class", "recipe-div");
+          var imgLink = data.image;
+          var img = document.createElement("img");
+          img.setAttribute("class", "recipe-img");
+          img.setAttribute("src", imgLink);
+          ingDiv.appendChild(img);
+          var list1Div = document.createElement("div");
+          list1Div.setAttribute("class", "recipe-ingredients");
+          var list2Div = document.createElement("div");
+          list2Div.setAttribute("class", "recipe-ingredients"); //extendedIngredients[0].originalString
+          var ingList = data.extendedIngredients;
+          var list1 = document.createElement("ul");
+          list1.setAttribute("class", "recipe-ingredients");
+          var numRows = Math.ceil(ingList.length / 2);
+          for (var i = 0; i < numRows; i++) {
+            var item = document.createElement("li");
+            item.textContent = ingList[i].originalString;
+            list1Div.appendChild(item);
+          }
+          ingDiv.appendChild(list1Div);
+          for (i = numRows + 1; i < ingList.length; i++) {
+            var item1 = document.createElement("li");
+            item1.textContent = ingList[i].originalString;
+            list2Div.appendChild(item1);
+          }
+          ingDiv.appendChild(list2Div);
+          container.appendChild(ingDiv);
+          var insTitle = document.createElement("p");
+          insTitle.setAttribute("class", "recipe-instruction-header");
+          insTitle.textContent = "Instructions";
+          container.appendChild(insTitle);
+          var inst = data.analyzedInstructions[0].steps; //analyzedInstructions[0].steps[0].step
+          var instructionDiv = document.createElement("div");
+          var insList = document.createElement("ul");
+          // insList.setAttribute("class", )
+          instructionDiv.setAttribute("class", "instruction-div");
+          for (i = 0; i < inst.length; i++) {
+            var instruction = document.createElement("li");
+            instruction.textContent = inst[i].step;
+            insList.appendChild(instruction);
+          }
+          instructionDiv.appendChild(insList);
+          container.appendChild(instructionDiv);
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+searchParam = () => {
+  var paramString = window.location;
+  var searchParams = new URLSearchParams(paramString);
+  var id = searchParams.get("search");
+  id = id.toString();
+  id = id.substring(4, id.length);
+  if (!id) {
+    //give them something american
+    getRecipeList("American");
+  } else if (id === "undefined") {
+    //give them something European
+    getRecipeList("European");
+  } else {
+    getRecipe(id);
+  }
+};
 
 //end of recipe section
 
@@ -778,171 +826,195 @@ var playlistContainerEl = document.querySelector(".music-container");
 var welcomeEl = document.querySelector("#welcome");
 
 // Defines an empty global variable for the Spotify access token
-var token = '';
+var token = "";
 
 // Transforms the user's input into a country code
-var getCountryCode = function(searchedCountry) {
-    // Splits the country into an array based on it's white space
-    var formattedCountry = searchedCountry.toLowerCase().split(" ");
+var getCountryCode = function (searchedCountry) {
+  // Splits the country into an array based on it's white space
+  var formattedCountry = searchedCountry.toLowerCase().split(" ");
 
-    for (var i = 0; i < formattedCountry.length; i++) {
-        // For each word(index), capitalize the first letter and keep the rest as lowercase
-        formattedCountry[i] = formattedCountry[i].charAt(0).toUpperCase() + formattedCountry[i].substring(1);
-    };
+  for (var i = 0; i < formattedCountry.length; i++) {
+    // For each word(index), capitalize the first letter and keep the rest as lowercase
+    formattedCountry[i] =
+      formattedCountry[i].charAt(0).toUpperCase() +
+      formattedCountry[i].substring(1);
+  }
 
-    // Joins each of the indexes together and puts whitespace between them
-    formattedCountry = formattedCountry.join(" ");
+  // Joins each of the indexes together and puts whitespace between them
+  formattedCountry = formattedCountry.join(" ");
 
-    var keys = Object.keys(countryCodesObj);
+  var keys = Object.keys(countryCodesObj);
 
-    searchedCountry = searchedCountry.toUpperCase();
+  searchedCountry = searchedCountry.toUpperCase();
 
-    if (keys.includes(searchedCountry)) {
-        welcomeEl.textContent = "Here's what people in the " + searchedCountry + " are listening to now!";
-        fetchPlaylist(searchedCountry, token);
-    } else {
-        welcomeEl.textContent = "Here's what people in " + formattedCountry + " are listening to now!";
-        var countryCode = keys.find(function(key) {
-            return countryCodesObj[key] === formattedCountry;
-        });
-        fetchPlaylist(countryCode, token);
-    };
+  if (keys.includes(searchedCountry)) {
+    welcomeEl.textContent =
+      "Here's what people in the " + searchedCountry + " are listening to now!";
+    fetchPlaylist(searchedCountry, token);
+  } else {
+    welcomeEl.textContent =
+      "Here's what people in " + formattedCountry + " are listening to now!";
+    var countryCode = keys.find(function (key) {
+      return countryCodesObj[key] === formattedCountry;
+    });
+    fetchPlaylist(countryCode, token);
+  }
 };
 
 // !!!! MUST BE DONE BEFORE RESULTS ARE SHOWN !!!!
 // Asks user to authorize this application
-var spotifyUserAuthorization = function() {
-    authorizeUri = 'https://accounts.spotify.com/authorize?client_id=c3f150a666754143adc77d0704da8ebf&response_type=token' +
+var spotifyUserAuthorization = function () {
+  authorizeUri =
+    "https://accounts.spotify.com/authorize?client_id=c3f150a666754143adc77d0704da8ebf&response_type=token" +
     // !!!! THIS URI REDIRECT NEEDS TO CHANGE TO THE DEPLOYED APPLICATION !!!!
-    '&redirect_uri=https://loganmerchant.github.io/scratching-your-travel-itch/';
-    location.replace(authorizeUri);
+    "&redirect_uri=https://loganmerchant.github.io/scratching-your-travel-itch/";
+  location.replace(authorizeUri);
 };
 
 // Fetches the top playlists for a given country.
-var fetchPlaylist = function(formattedCountry, token) {
-    var searchUri = "https://api.spotify.com/v1/browse/featured-playlists?country=" + formattedCountry;
-    
-    fetch(searchUri, {
-        // Provides the temporary authorization token in the request
-        headers: {
-            'Authorization': "Bearer " + token,
-        }
-    })
+var fetchPlaylist = function (formattedCountry, token) {
+  var searchUri =
+    "https://api.spotify.com/v1/browse/featured-playlists?country=" +
+    formattedCountry;
+
+  fetch(searchUri, {
+    // Provides the temporary authorization token in the request
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
     // Formats the response in JSON
-    .then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                displayPlaylist(data);
-            })
-        } else {
-            welcomeEl.textContent = "Error: " + response.status + "! Please try again.";
-            playlistContainerEl.innerHTML = "";
-        };
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayPlaylist(data);
+        });
+      } else {
+        welcomeEl.textContent =
+          "Error: " + response.status + "! Please try again.";
+        playlistContainerEl.innerHTML = "";
+      }
     });
 };
 
 // Displays playlists for the searched country.
 var displayPlaylist = function (data) {
-    // Empties any previous search...just in case
-    playlistContainerEl.innerHTML = "";
-    // Creates a playlist container with various info, for the first 5 playlists returned by Spotify
-    for (var i = 0; i < 9; i++) {
-        var playlistEl = document.createElement("div");
-        var playlistTitle = document.createElement("h2");
-        var playlistSubtitle = document.createElement("h4");
-        var playlistImgContainer = document.createElement("div");
-        var playlistImg = document.createElement("img");
-        var playlistTrackCount = document.createElement("p");
-        var playlistLink = document.createElement("p");
+  // Empties any previous search...just in case
+  playlistContainerEl.innerHTML = "";
+  // Creates a playlist container with various info, for the first 5 playlists returned by Spotify
+  for (var i = 0; i < 9; i++) {
+    var playlistEl = document.createElement("div");
+    var playlistTitle = document.createElement("h2");
+    var playlistSubtitle = document.createElement("h4");
+    var playlistImgContainer = document.createElement("div");
+    var playlistImg = document.createElement("img");
+    var playlistTrackCount = document.createElement("p");
+    var playlistLink = document.createElement("p");
 
-        playlistEl.classList = "colspan-8 colspan-md-5 colspan-lg-3 " +
-        "border m-3 p-3 bg-steel-hover text-center";
-        playlistTitle.textContent = data.playlists.items[i].name;
-        playlistSubtitle.innerHTML = data.playlists.items[i].description;
-        playlistImgContainer.classList = "img-container";
-        playlistImgContainer.style = "width: 300px; height: 300px; margin: auto;";
-        playlistImg.setAttribute("src", data.playlists.items[i].images[0].url);
-        playlistTrackCount.textContent = "Total track count: " + data.playlists.items[i].tracks.total;
-        playlistLink.innerHTML = "Listen to " + data.playlists.items[i].name + 
-        " on <a href=" + data.playlists.items[i].external_urls.spotify + " target='_blank'>Spotify</a>";
+    playlistEl.classList =
+      "colspan-8 colspan-md-5 colspan-lg-3 " +
+      "border m-3 p-3 bg-steel-hover text-center";
+    playlistTitle.textContent = data.playlists.items[i].name;
+    playlistSubtitle.innerHTML = data.playlists.items[i].description;
+    playlistImgContainer.classList = "img-container";
+    playlistImgContainer.style = "width: 300px; height: 300px; margin: auto;";
+    playlistImg.setAttribute("src", data.playlists.items[i].images[0].url);
+    playlistTrackCount.textContent =
+      "Total track count: " + data.playlists.items[i].tracks.total;
+    playlistLink.innerHTML =
+      "Listen to " +
+      data.playlists.items[i].name +
+      " on <a href=" +
+      data.playlists.items[i].external_urls.spotify +
+      " target='_blank'>Spotify</a>";
 
-        playlistImgContainer.appendChild(playlistImg);
-        playlistEl.appendChild(playlistImgContainer);
-        playlistEl.appendChild(playlistSubtitle);
-        playlistEl.appendChild(playlistTrackCount);
-        playlistEl.appendChild(playlistLink);
-        playlistContainerEl.appendChild(playlistEl);
-    };
-    console.log(data);
+    playlistImgContainer.appendChild(playlistImg);
+    playlistEl.appendChild(playlistImgContainer);
+    playlistEl.appendChild(playlistSubtitle);
+    playlistEl.appendChild(playlistTrackCount);
+    playlistEl.appendChild(playlistLink);
+    playlistContainerEl.appendChild(playlistEl);
+  }
+  console.log(data);
 };
 
 // Checks to see if user has an access token for Spotify
-var tokenCheck = function() {
-    searchedCountry = localStorage.getItem("searchTerm");
-    // Pulls any token saved in sessionStorage
-    var savedToken = sessionStorage.getItem("token");
-    // Finds any hash fragments with in the url.
-    var receivedToken = document.location.hash;
+var tokenCheck = function () {
+  searchedCountry = localStorage.getItem("searchTerm");
+  // Pulls any token saved in sessionStorage
+  var savedToken = sessionStorage.getItem("token");
+  // Finds any hash fragments with in the url.
+  var receivedToken = document.location.hash;
 
-    // If there is no token in sessionStorage and there is no hash fragment with an access token...
-    if (!savedToken && !receivedToken) {
-        // Redirect the user to Spotify's authorization page.
-        spotifyUserAuthorization();
+  // If there is no token in sessionStorage and there is no hash fragment with an access token...
+  if (!savedToken && !receivedToken) {
+    // Redirect the user to Spotify's authorization page.
+    spotifyUserAuthorization();
     // If there is a hash fragment with an access token...
-    } else if (receivedToken.includes("access_token=")) {
-        // Isolate the access token in it's own string...
-        receivedToken = receivedToken.split("=")[1].split("&")[0];
-        // Set the token in sessionStorage.
-        sessionStorage.setItem("token", receivedToken);
-        // Set the global var of `token` to match the isolated token.
-        token = receivedToken;
-        window.location.replace('https://loganmerchant.github.io/scratching-your-travel-itch/music.html');
-    } else {
-        // Set the global var of `token` to match the token in sessionStorage.
-        token = savedToken;
-    };
-    // Verifies that a token is being set for this script. 
-    console.log("Token set as: " + token);
-    getCountryCode(searchedCountry);
+  } else if (receivedToken.includes("access_token=")) {
+    // Isolate the access token in it's own string...
+    receivedToken = receivedToken.split("=")[1].split("&")[0];
+    // Set the token in sessionStorage.
+    sessionStorage.setItem("token", receivedToken);
+    // Set the global var of `token` to match the isolated token.
+    token = receivedToken;
+    window.location.replace(
+      "https://loganmerchant.github.io/scratching-your-travel-itch/music.html"
+    );
+  } else {
+    // Set the global var of `token` to match the token in sessionStorage.
+    token = savedToken;
+  }
+  // Verifies that a token is being set for this script.
+  console.log("Token set as: " + token);
+  getCountryCode(searchedCountry);
 };
 
-if (window.location.toString().includes('music.html') || window.location.hash > 0) {
-    tokenCheck();
-};
+if (
+  window.location.toString().includes("music.html") ||
+  window.location.hash > 0
+) {
+  tokenCheck();
+}
 
 // !!!!! END OF MUSIC SECTION !!!!!
 
 // Homepage Flag
-var displayFlag = function() {
-    var searchTerm = searchInfo;
-    localStorage.setItem('searchTerm', searchTerm);
-    var formattedCountry = searchTerm.toLowerCase().split(" ");
+var displayFlag = function () {
+  var searchTerm = searchInfo;
+  localStorage.setItem("searchTerm", searchTerm);
+  var formattedCountry = searchTerm.toLowerCase().split(" ");
 
-    for (var i = 0; i < formattedCountry.length; i++) {
-        // For each word(index), capitalize the first letter and keep the rest as lowercase
-        formattedCountry[i] = formattedCountry[i].charAt(0).toUpperCase() + formattedCountry[i].substring(1);
-    };
+  for (var i = 0; i < formattedCountry.length; i++) {
+    // For each word(index), capitalize the first letter and keep the rest as lowercase
+    formattedCountry[i] =
+      formattedCountry[i].charAt(0).toUpperCase() +
+      formattedCountry[i].substring(1);
+  }
 
-    // Joins each of the indexes together and puts whitespace between them
-    formattedCountry = formattedCountry.join(" ");
+  // Joins each of the indexes together and puts whitespace between them
+  formattedCountry = formattedCountry.join(" ");
 
-    var keys = Object.keys(countryCodesObj);
+  var keys = Object.keys(countryCodesObj);
 
-    searchTerm = searchTerm.toUpperCase();
+  searchTerm = searchTerm.toUpperCase();
 
-    if (!keys.includes(searchTerm)) {
-        searchTerm = keys.find(function(key) {
-            return countryCodesObj[key] === formattedCountry;
-        });
-    };
-    
-    searchTerm = searchTerm.toLowerCase();
-    
-    var countryFlagEl = document.querySelector("#country-flag");
-    var countryFlagImg = document.createElement("img");
-    countryFlagImg.setAttribute("src", "https://flagcdn.com/h240/" + searchTerm + ".png");
-    countryFlagEl.innerHTML = "";
-    countryFlagEl.appendChild(countryFlagImg);
+  if (!keys.includes(searchTerm)) {
+    searchTerm = keys.find(function (key) {
+      return countryCodesObj[key] === formattedCountry;
+    });
+  }
+
+  searchTerm = searchTerm.toLowerCase();
+
+  var countryFlagEl = document.querySelector("#country-flag");
+  var countryFlagImg = document.createElement("img");
+  countryFlagImg.setAttribute(
+    "src",
+    "https://flagcdn.com/h240/" + searchTerm + ".png"
+  );
+  countryFlagEl.innerHTML = "";
+  countryFlagEl.appendChild(countryFlagImg);
 };
 
 // End of Homepage Flag

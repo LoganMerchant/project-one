@@ -1,3 +1,6 @@
+<!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. © Copyright The Dangling Blobs-->
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -82,9 +85,10 @@
           </button>
           </div>
         </div>
-
+        <div class = "flag-and-image">
         <div id="country-flag"></div>
-
+        <div id = "country-image" class = "country-image"></div>
+        </div>
         <div class="cards">
           <div class="row">
             <div class="card cell" style="margin-top:1rem;">
@@ -108,16 +112,16 @@
             <div class="card cell">
               <div class="card-inner">
                 <div class="card-front">
-                  <img src="./assets/images/news.gif"
+                  <img id="news-gif" src="./assets/images/news.gif"
                   width="200px"/>
-                  <div class="news-img responsive"></div>
-                  <div class="output-h1"></div>
-                  <div class="output-h2"></div>
+                  <div id="news-img"></div>
+                  <h1 id="output-h1"></h1>
+                  <h2 id="output-h2"></h2>
                 </div>
                 <div class="card-back">
                   <a href="./news.html">
                     <button class="button dark rounded drop-shadow">
-                      <a class="nyt-link"></a>
+                      <a id="nyt-link"></a>
                     </button>
                   </a>
                 </div>
@@ -146,7 +150,7 @@
             <div class="card cell">
               <div class="card-inner">
                 <div class="card-front">
-                  <img src="./assets/images/Newtons_cradle_animation_book_2.gif" width="150px" height="200px" alt="centered image"/>
+                  <img id="wiki-gif" src="./assets/images/Newtons_cradle_animation_book_2.gif" width="150px" height="200px" alt="centered image"/>
                   <h1 id="wiki-h1"></h1>
                   <h2 id="wiki-h2"></h2>
                 </div>
@@ -187,6 +191,9 @@
   </div>
     <div id="response-header"></div>
     <div id="response-container"></div>
+    <footer class="copyright">
+      <p class="copy-info">&#169 Copyright The Dangling Blobs</p>
+  </footer>
     <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
