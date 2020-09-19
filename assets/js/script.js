@@ -1,3 +1,5 @@
+// <!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. -->
+
 var button = $(".btn");
 var searchInfo = $(".form-control").val();
 var list = JSON.parse(localStorage.getItem("headlines")) || [];
