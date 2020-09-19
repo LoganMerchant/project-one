@@ -13,7 +13,8 @@ $(button).on("click", function (event) {
   console.log(searchInfo);
   // make sure to enter a valid search item
   if (searchInfo === "") {
-    alert("input a country please");
+    //alert("input a country please");
+    $("#no-country").modal();
   } else {
     list.push(searchInfo);
     localStorage.setItem("headlines", JSON.stringify(list));
