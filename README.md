@@ -12,7 +12,7 @@
 * Spotify API
 
 ## Application's Purpose
-Allows a user to find more information about a given country, so that they can experience that culture in a small way, without having to actually trav If however the user would like to eventually travel to said country, they will be all the more prepared after using this application.
+Allows a user to find more information about a given country, so that they can experience that culture in a small way, without having to actually travel. If however the user would like to eventually travel to said country, they will be all the more prepared after using this application.
 
 ## Development Process
 The collaborators on this project each took on their own role and they are as follows:
