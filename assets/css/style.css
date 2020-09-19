@@ -1,4 +1,4 @@
-/* <!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. --> */
+/* <!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. © Copyright The Dangling Blobs --> */
 
 
 * {
@@ -241,3 +241,8 @@ h2 {
 }
 
 /* END OF RECIPE */
+
+footer {
+    text-align: center;
+    top: 20px;
+}

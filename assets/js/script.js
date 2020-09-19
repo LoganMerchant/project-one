@@ -1,4 +1,4 @@
-// <!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. -->
+// <!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. © Copyright The Dangling Blobs-->
 
 var button = $(".btn");
 var searchInfo = $(".form-control").val();

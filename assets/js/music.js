@@ -1,3 +1,5 @@
+// <!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. © Copyright The Dangling Blobs-->
+
 // Creates vars for ids
 var playlistContainerEl = document.querySelector("#playlist-container");
 var welcomeEl = document.querySelector("#welcome");
