@@ -958,9 +958,12 @@ var tokenCheck = function () {
     sessionStorage.setItem("token", receivedToken);
     // Set the global var of `token` to match the isolated token.
     token = receivedToken;
-    window.location.replace(
+    location.assign(
       "https://loganmerchant.github.io/scratching-your-travel-itch/music.html"
     );
+  } else if (location.search.includes("access_denied")) {
+      token = "denied";
+      sessionStorage.setItem("token", token);3
   } else {
     // Set the global var of `token` to match the token in sessionStorage.
     token = savedToken;
@@ -970,12 +973,6 @@ var tokenCheck = function () {
   getCountryCode(searchedCountry);
 };
 
-if (
-  window.location.toString().includes("music.html") ||
-  window.location.hash > 0
-) {
-  tokenCheck();
-}
 
 // !!!!! END OF MUSIC SECTION !!!!!
 
@@ -1018,3 +1015,5 @@ var displayFlag = function () {
 };
 
 // End of Homepage Flag
+
+tokenCheck();
