@@ -622,6 +622,7 @@ var cuisine;
 var id;
 //on click on recipe, go to recipe.html
 $("#button-addon2").on("click", function () {
+   
 //clear out country-image incase there's something already there
     var img = document.querySelector("#ctryImg");
     if(img) {
@@ -669,6 +670,7 @@ getRecipeImage = (cuisine) => {
         }
         //choose a random recipe
         id = data.results[recipeNum].id;
+        //add id to the localstorage
         localStorage.setItem("cuisindID", id);
         var img = data.results[recipeNum].image;
         var image = document.createElement("img");
