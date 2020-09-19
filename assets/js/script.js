@@ -1015,6 +1015,6 @@ var displayFlag = function () {
 
 // End of Homepage Flag
 
-if (location.href.includes("music.html")) {
+if (location.href.includes("music.html" || "access_token=")) {
     tokenCheck();
 };
