@@ -975,8 +975,9 @@ var tokenCheck = function () {
     token = "denied";
     sessionStorage.setItem("token", token);
   } else if (savedToken === "denied") {
-    welcomeEl.textContent = "In order to display playlists, you must authorize our application.";
-  } else {
+    return welcomeEl.innerHTML = "In order to display playlists, you must authorize our application." + 
+    "<button onclick='spotifyUserAuthorization()'>Click Here to Authorize</button>";
+} else {
     // Set the global var of `token` to match the token in sessionStorage.
     token = savedToken;
   }
@@ -1027,6 +1028,11 @@ var displayFlag = function () {
 };
 
 // End of Homepage Flag
+
+if (location.search.includes("access_denied")) {
+    token = "denied";
+    sessionStorage.setItem("token", token);
+};
 
 if (location.href.includes("music.html") || location.hash.includes("access_token=")) {
     tokenCheck();
