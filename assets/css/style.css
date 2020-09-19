@@ -107,9 +107,11 @@ h2 {
 }
 
 .recipe-card-title {
-  font-size: 15px;
-  text-align: center;
-  margin-top: 5px;
+
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5px;
+    text-shadow: 1px 1px black;
 }
 
 @-webkit-keyframes gradientBG {

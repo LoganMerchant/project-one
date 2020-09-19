@@ -86,27 +86,25 @@
 
         <div id="country-flag"></div>
 
-        <div class="grid">
+        <div class="cards">
           <div class="row">
             <div class="card cell">
-              <div class="recipes-container">
                 <div class="card-inner">
                   <div class="card-front" id="recipe-front">
-                  <img src="./assets/images/piper-haywood_nan-nan-recipes.gif" width = "270px"/>
+                  <img src="./assets/images/piper-haywood_nan-nan-recipes.gif" width = "250px"/>
                   </div>
                   <div class="card-back">
                     <a href="#">
                       <button
                         class="button dark rounded drop-shadow"
-                        id="recipe-button"
-                      >
+                        id="recipe-button">
                         Recipes
                       </button>
                     </a>
                   </div>
                 </div>
-              </div>
             </div>
+            
 
             <div class="card cell">
               <div class="card-inner">
@@ -138,8 +136,7 @@
                   <a href="./music.html">
                     <button
                       class="button dark rounded drop-shadow"
-                      onclick="tokenCheck()"
-                    >
+                      onclick="tokenCheck()">
                       Music
                     </button>
                   </a>
@@ -166,12 +163,34 @@
           </div>
         </div>
       </div>
+    </div>
     </main>
-
+<!--modal for if they don't enter a country-->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="no-country" tabindex="-1" role="dialog" aria-labelledby="no-countryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="no-countryModalLabel">Enter country please!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          In order for us to help you travel, we need to have a destination. Please enter a country name.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
     <div id="response-header"></div>
     <div id="response-container"></div>
     <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
