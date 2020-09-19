@@ -1,111 +1,3 @@
-var button = $(".btn");
-var searchInfo = $(".form-control").val();
-var list = JSON.parse(localStorage.getItem("headlines")) || [];
-var key = `pZwZYOOhZZTfRVT0WHKsRuANSpS6D0wl`;
-var nytInfo = document.querySelector(".nyt-info");
-// click on button
-//NYT Section
-$(button).on("click", function (event) {
-  event.preventDefault();
-
-  searchInfo = $(".form-control").val();
-  $("form-control").empty();
-  console.log(searchInfo);
-  // make sure to enter a valid search item
-  if (searchInfo === "") {
-    //alert("input a country please");
-    $("#no-country").modal();
-  } else {
-    list.push(searchInfo);
-    localStorage.setItem("headlines", JSON.stringify(list));
-
-    getNews(searchInfo);
-    wikiInfo(searchInfo);
-  }
-});
-function getNews() {
-  fetch(
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInfo}&api-key=${key}`
-  )
-    // sending the info to NYT
-    .then(function (response) {
-      var data = response.json();
-      return data;
-      console.log(data);
-    })
-    .then(function (data) {
-      //getting the info from NYT
-      console.log(data);
-
-      var newsImg = document.querySelector(".news-img");
-      var pictureDisplay = document.createElement("img");
-      var headline = data.response.docs[0]?.headline?.main;
-      var firstPara = data.response.docs[0]?.lead_paragraph;
-      if (firstPara.length >= 500) {
-        firstPara = firstPara.slice(0, 500) + "...";
-      }
-      var nytLink = data.response.docs[0]?.web_url;
-
-      if (data.response.docs[0]?.multimedia[0]?.legacy?.xlarge) {
-        pictureDisplay.setAttribute(
-          "src",
-          "https://www.nytimes.com/" +
-            data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
-        );
-        // newsImg.appendChild(pictureDisplay);
-
-        pictureDisplay.setAttribute("width", 130);
-      }
-
-      //displaying the items from NYT
-      $(".news-img").html("");
-      $(".output-h1").html("");
-      $(".output-h2").html("");
-      $(".nyt-link").html("");
-
-      // $("#news-img").append(newsImg);
-      newsImg.appendChild(pictureDisplay);
-      $(".output-h1").append(headline);
-      $(".output-h2").append(firstPara);
-      $(".nyt-link").html(
-        `<a href="${nytLink}/" target="_blank">Read Article</a>`
-      );
-    });
-}
-// wiki section
-
-function wikiInfo() {
-  fetch(
-    // Make a fetch request to Wikipedia to get a article title
-    `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=query&prop=info&format=json&titles=${searchInfo}&prop=description`
-  )
-    .then(function (wikiResponse) {
-      var wikiData = wikiResponse.json();
-      return wikiData;
-    })
-    .then(function (wikiData) {
-      console.log(wikiData);
-
-      var keys = Object.keys(wikiData.query.pages);
-      // var pageId = wikiData.query.pages[keys[0]].pageid;
-      var wikiDescript = wikiData.query.pages[keys[0]].description;
-      var wikiTitle = wikiData.query.pages[keys[0]].title;
-      // console.log(pageId)
-
-      $("#wiki-h2").html("");
-      $("#wiki-h1").html("");
-
-      $("#wiki-h2").append(wikiDescript);
-      $("#wiki-h1").append(wikiTitle);
-      $("#wiki-link").html(
-        `<a href="https://en.wikipedia.org/wiki/${searchInfo}" target="_blank">Read Wiki Page</a>`
-      );
-    });
-}
-
-//Recipe section
-//Recipe Card Section
-
 const cuisines = {
     "belarus": "Eastern European",
     "ukraine" : "Eastern European",
@@ -119,6 +11,8 @@ const cuisines = {
     "burundi" : "African",
     "hungary" : "European",
     "england": "British",
+    "great britain": "British",
+    "uk": "British",
     "britain": "British",
     "scotland" : "British",
     "wales" : "British",
@@ -263,6 +157,7 @@ const cuisines = {
     "kazakhstan" : "Middle Eastern",
     "tajikistan" : "Middle Eastern",
     "united arab emirates" : "Middle Eastern",
+    "uae": "Middle Eastern",
     "qatar" : "Middle Eastern",
     "maldives" : "asian",
     "laos" : "Asian",
@@ -288,201 +183,6 @@ const cuisines = {
     "senegal" : "African"
 };
 
-var cuisine;
-var id;
-//on click on recipe, go to recipe.html
-$("#button-addon2").on("click", function (){
-    //clear out card in case there's already something there
-    var frontCard = document.querySelector("#recipe-front");
-   frontCard.innerHTML="";
-    var searchText = $("#country").val();
-    searchText = searchText.toLowerCase();
-   for (const[key,value] of Object.entries(cuisines)) {
-       if(searchText === key) {
-           cuisine = value;
-       }
-   }
-    getRecipeImage(cuisine);
-});
-//display an image on the front of the card
-
-getRecipeImage = (cuisine) => {
-    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
-        }
-    }).then(response => {
-if(response.ok) {
-    response.json().then(function(data) {
-        //get the number of results
-        var numResults = data.results.length;
-         recipeNum = Math.floor(Math.random() * numResults-1);
-        //don't allow it to be negative
-        if(recipeNum <0) {
-            recipeNum = 0;
-        }
-        //choose a random recipe
-        id = data.results[recipeNum].id;
-        var img = data.results[recipeNum].image;
-        var image = document.createElement("img");
-        image.setAttribute("src", img);
-        image.setAttribute("width", "270px");
-        var cardFront = document.querySelector("#recipe-front");
-        cardFront.appendChild(image);
-       var title = data.results[recipeNum].title;
-       var recipeTitle = document.createElement("p");
-       recipeTitle.setAttribute("class", "recipe-card-title");
-       recipeTitle.textContent = title;
-       cardFront.appendChild(recipeTitle);
-
-    })
-}
-});
-
-};
-
-//on button click, open recipe.html, and append the query info
-$("#recipe-button").on("click", function(){
-    window.location = "recipes.html?id=" + id;
-});
-//end recipe card section
-
-
-//Recipe page section
-
-var container = document.querySelector("#container");
-
-var cuisine;
-//if no id is given, we can still display a recipe
-getRecipeList = (cuisine) => {
-    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
-        }
-    }).then(response => {
-if(response.ok) {
-    response.json().then(function(data) {
-        var numResults = data.results.length;
-        var recipeNum = Math.floor(Math.random() * numResults -1);
-        id = data.results[recipeNum].id;
-       getRecipe(id);
-    })
-}
-});
-
-};
-
-
-    getRecipe = (id) => {
-        fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/information", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
-        }
-    })
-    .then(response => { 
-        if(response.ok) {
-            response.json().then(function(data){ 
-                console.log(data);
-                //add in title
-                var title = document.querySelector("#title");
-                title.textContent += " " + data.title;
-               //put the description in
-               var desc = data.summary;
-               var description = document.createElement("h4");
-               description.setAttribute("class", "recipe-description");
-               description.innerHTML = desc;
-               container.appendChild(description);
-               var ingTitle = document.createElement("p");
-               ingTitle.setAttribute("class", "ingredient-header");
-               ingTitle.textContent = "Ingredients";
-               container.appendChild(ingTitle);
-               //create a new container for the ingredients, and image
-               var ingDiv = document.createElement("div");
-               ingDiv.setAttribute("class", "recipe-div");
-               var imgLink = data.image;
-               var img = document.createElement("img");
-               img.setAttribute("class", "recipe-img");
-               img.setAttribute("src", imgLink);
-               ingDiv.appendChild(img);
-               var list1Div = document.createElement("div");
-                list1Div.setAttribute("class", "recipe-ingredients");
-                var list2Div = document.createElement("div");
-                list2Div.setAttribute("class", "recipe-ingredients"); //extendedIngredients[0].originalString
-                var ingList = data.extendedIngredients;
-                var list1 = document.createElement("ul");
-                list1.setAttribute("class", "recipe-ingredients");
-                var numRows = Math.ceil(ingList.length / 2);
-                for(var i = 0; i< numRows; i++) {
-                    var item = document.createElement("li");
-                    item.textContent = ingList[i].originalString;
-                    list1Div.appendChild(item);
-                }
-                ingDiv.appendChild(list1Div);
-                for(i = numRows + 1; i<ingList.length; i++) {
-                    var item1 = document.createElement("li");
-                    item1.textContent = ingList[i].originalString;
-                    list2Div.appendChild(item1);
-                }
-                ingDiv.appendChild(list2Div);
-                container.appendChild(ingDiv);
-                var insTitle = document.createElement("p");
-                insTitle.setAttribute("class", "recipe-instruction-header");
-                insTitle.textContent ="Instructions";
-                container.appendChild(insTitle);
-                var inst = data.analyzedInstructions[0].steps; //analyzedInstructions[0].steps[0].step
-                var instructionDiv = document.createElement("div");
-                var insList = document.createElement("ul");
-               // insList.setAttribute("class", )
-                instructionDiv.setAttribute("class", "instruction-div");
-                for(i=0; i<inst.length; i++) {
-                    var instruction = document.createElement("li");
-                    instruction.textContent=inst[i].step;
-                    insList.appendChild(instruction);
-                }
-                instructionDiv.appendChild(insList);
-                container.appendChild(instructionDiv);
-
-            });
-        }
-    })
-    .catch(err => {
-        console.log(err);
-    });
-    }; 
-
-    searchParam = () => {
-        var paramString = window.location;
-        var searchParams = new URLSearchParams(paramString);
-        var id = searchParams.get("search");
-        id = id.toString();
-       id = id.substring(4,id.length);
-        if(!id) {
-            //give them something american
-            getRecipeList("American");
-        }
-        else if(id === "undefined") {
-                //give them something European
-                getRecipeList("European")
-    }
-        else {
-        getRecipe(id);
-        }
-    };
-
-//end of recipe section
-
-// !!!!! MUSIC SECTION !!!!!
-
-var playlistContainerEl = document.querySelector(".music-container");
-var welcomeEl = document.querySelector("#welcome");
-
-// Used to convert a user's search into a country code.
 var countryCodesObj = {
     "BD": "Bangladesh",
     "BE": "Belgium",
@@ -733,8 +433,350 @@ var countryCodesObj = {
     "ID": "Indonesia",
     "UA": "Ukraine",
     "QA": "Qatar",
-    "MZ": "Mozambique"
+    "MZ": "Mozambique",
 };
+
+var button = $(".btn");
+var searchInfo = $(".form-control").val();
+var list = JSON.parse(localStorage.getItem("headlines")) || [];
+var key = `pZwZYOOhZZTfRVT0WHKsRuANSpS6D0wl`;
+var nytInfo = document.querySelector(".nyt-info");
+// click on button
+//NYT Section
+
+$(button).on("click", function (event) {
+  event.preventDefault();
+
+  searchInfo = $(".form-control").val();
+  $("form-control").empty();
+
+  searchInfo = searchInfo.toLowerCase();
+
+  // make sure to enter a valid search item
+
+var matchedCuisineSearch = function() {
+    var cuisineKeys = Object.keys(cuisines);
+
+    for (var i = 0; i < cuisineKeys.length; i++) {
+        cuisineKeys[i] = cuisineKeys[i].toLowerCase();
+        if (searchInfo === cuisineKeys[i]) {
+            console.log(cuisineKeys[i]);
+            return true;
+        } 
+    };
+    return false;
+};
+
+var matchedCodeSearch = function() {
+    var countryCodesVals = Object.values(countryCodesObj);
+
+    for (var i = 0; i < countryCodesVals.length; i++) {
+        countryCodesVals[i] = countryCodesVals[i].toLowerCase();
+        if (searchInfo === countryCodesVals[i]) {
+            console.log(countryCodesVals[i]);
+            return true;
+        }
+    };
+    return false;
+};
+
+if (searchInfo === 'uk') {
+    searchInfo = "united kingdom";
+};
+if (searchInfo === 'uae') {
+    searchInfo = "united arab emirates";
+};
+
+  if (searchInfo === "" || (matchedCuisineSearch() === false && matchedCodeSearch() === false)) {
+    //alert("input a country please");
+    $("#no-country").modal();
+  } else {
+    list.push(searchInfo);
+    localStorage.setItem("headlines", JSON.stringify(list));
+
+    displayFlag();
+    getNews(searchInfo);
+    wikiInfo(searchInfo);
+  }
+});
+function getNews() {
+  fetch(
+    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInfo}&api-key=${key}`
+  )
+    // sending the info to NYT
+    .then(function (response) {
+      var data = response.json();
+      return data;
+      console.log(data);
+    })
+    .then(function (data) {
+      //getting the info from NYT
+      console.log(data);
+
+      var newsImg = document.querySelector(".news-img");
+      var pictureDisplay = document.createElement("img");
+      var headline = data.response.docs[0]?.headline?.main;
+      var firstPara = data.response.docs[0]?.lead_paragraph;
+      if (firstPara.length >= 500) {
+        firstPara = firstPara.slice(0, 500) + "...";
+      }
+      var nytLink = data.response.docs[0]?.web_url;
+
+      if (data.response.docs[0]?.multimedia[0]?.legacy?.xlarge) {
+        pictureDisplay.setAttribute(
+          "src",
+          "https://www.nytimes.com/" +
+            data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
+        );
+        // newsImg.appendChild(pictureDisplay);
+
+        pictureDisplay.setAttribute("width", 130);
+      }
+
+      //displaying the items from NYT
+      $(".news-img").html("");
+      $(".output-h1").html("");
+      $(".output-h2").html("");
+      $(".nyt-link").html("");
+
+      // $("#news-img").append(newsImg);
+      newsImg.appendChild(pictureDisplay);
+      $(".output-h1").append(headline);
+      $(".output-h2").append(firstPara);
+      $(".nyt-link").html(
+        `<a href="${nytLink}/" target="_blank">Read Article</a>`
+      );
+    });
+}
+// wiki section
+
+function wikiInfo() {
+  fetch(
+    // Make a fetch request to Wikipedia to get a article title
+    `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=query&prop=info&format=json&titles=${searchInfo}&prop=description`
+  )
+    .then(function (wikiResponse) {
+      var wikiData = wikiResponse.json();
+      return wikiData;
+    })
+    .then(function (wikiData) {
+      console.log(wikiData);
+
+      var keys = Object.keys(wikiData.query.pages);
+      // var pageId = wikiData.query.pages[keys[0]].pageid;
+      var wikiDescript = wikiData.query.pages[keys[0]].description;
+      var wikiTitle = wikiData.query.pages[keys[0]].title;
+      // console.log(pageId)
+
+      $("#wiki-h2").html("");
+      $("#wiki-h1").html("");
+
+      $("#wiki-h2").append(wikiDescript);
+      $("#wiki-h1").append(wikiTitle);
+      $("#wiki-link").html(
+        `<a href="https://en.wikipedia.org/wiki/${searchInfo}" target="_blank">Read Wiki Page</a>`
+      );
+    });
+}
+
+//Recipe section
+//Recipe Card Section
+
+var cuisine;
+var id;
+//on click on recipe, go to recipe.html
+$("#button-addon2").on("click", function (){
+    //clear out card in case there's already something there
+    var frontCard = document.querySelector("#recipe-front");
+   frontCard.innerHTML="";
+    var searchText = $("#country").val();
+    searchText = searchText.toLowerCase();
+    console.log(searchText);
+   for (const[key,value] of Object.entries(cuisines)) {
+       if(searchText === key) {
+           cuisine = value;
+       }
+   }
+    getRecipeImage(cuisine);
+});
+//display an image on the front of the card
+
+getRecipeImage = (cuisine) => {
+    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
+        }
+    }).then(response => {
+if(response.ok) {
+    response.json().then(function(data) {
+        //get the number of results
+        var numResults = data.results.length;
+         recipeNum = Math.floor(Math.random() * numResults-1);
+        //don't allow it to be negative
+        if(recipeNum <0) {
+            recipeNum = 0;
+        }
+        //choose a random recipe
+        id = data.results[recipeNum].id;
+        var img = data.results[recipeNum].image;
+        var image = document.createElement("img");
+        image.setAttribute("src", img);
+        image.setAttribute("width", "270px");
+        var cardFront = document.querySelector("#recipe-front");
+        cardFront.appendChild(image);
+       var title = data.results[recipeNum].title;
+       var recipeTitle = document.createElement("p");
+       recipeTitle.setAttribute("class", "recipe-card-title");
+       recipeTitle.textContent = title;
+       cardFront.appendChild(recipeTitle);
+
+    })
+}
+});
+
+};
+
+//on button click, open recipe.html, and append the query info
+$("#recipe-button").on("click", function(){
+    window.location = "recipes.html?id=" + id;
+});
+//end recipe card section
+
+
+//Recipe page section
+
+var container = document.querySelector("#container");
+
+var cuisine;
+//if no id is given, we can still display a recipe
+getRecipeList = (cuisine) => {
+    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" + cuisine, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
+        }
+    }).then(response => {
+if(response.ok) {
+    response.json().then(function(data) {
+        var numResults = data.results.length;
+        var recipeNum = Math.floor(Math.random() * numResults -1);
+        id = data.results[recipeNum].id;
+       getRecipe(id);
+    })
+}
+});
+
+};
+
+
+    getRecipe = (id) => {
+        fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/information", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+            "x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
+        }
+    })
+    .then(response => { 
+        if(response.ok) {
+            response.json().then(function(data){ 
+                console.log(data);
+                //add in title
+                var title = document.querySelector("#title");
+                title.textContent += " " + data.title;
+               //put the description in
+               var desc = data.summary;
+               var description = document.createElement("h4");
+               description.setAttribute("class", "recipe-description");
+               description.innerHTML = desc;
+               container.appendChild(description);
+               var ingTitle = document.createElement("p");
+               ingTitle.setAttribute("class", "ingredient-header");
+               ingTitle.textContent = "Ingredients";
+               container.appendChild(ingTitle);
+               //create a new container for the ingredients, and image
+               var ingDiv = document.createElement("div");
+               ingDiv.setAttribute("class", "recipe-div");
+               var imgLink = data.image;
+               var img = document.createElement("img");
+               img.setAttribute("class", "recipe-img");
+               img.setAttribute("src", imgLink);
+               ingDiv.appendChild(img);
+               var list1Div = document.createElement("div");
+                list1Div.setAttribute("class", "recipe-ingredients");
+                var list2Div = document.createElement("div");
+                list2Div.setAttribute("class", "recipe-ingredients"); //extendedIngredients[0].originalString
+                var ingList = data.extendedIngredients;
+                var list1 = document.createElement("ul");
+                list1.setAttribute("class", "recipe-ingredients");
+                var numRows = Math.ceil(ingList.length / 2);
+                for(var i = 0; i< numRows; i++) {
+                    var item = document.createElement("li");
+                    item.textContent = ingList[i].originalString;
+                    list1Div.appendChild(item);
+                }
+                ingDiv.appendChild(list1Div);
+                for(i = numRows + 1; i<ingList.length; i++) {
+                    var item1 = document.createElement("li");
+                    item1.textContent = ingList[i].originalString;
+                    list2Div.appendChild(item1);
+                }
+                ingDiv.appendChild(list2Div);
+                container.appendChild(ingDiv);
+                var insTitle = document.createElement("p");
+                insTitle.setAttribute("class", "recipe-instruction-header");
+                insTitle.textContent ="Instructions";
+                container.appendChild(insTitle);
+                var inst = data.analyzedInstructions[0].steps; //analyzedInstructions[0].steps[0].step
+                var instructionDiv = document.createElement("div");
+                var insList = document.createElement("ul");
+               // insList.setAttribute("class", )
+                instructionDiv.setAttribute("class", "instruction-div");
+                for(i=0; i<inst.length; i++) {
+                    var instruction = document.createElement("li");
+                    instruction.textContent=inst[i].step;
+                    insList.appendChild(instruction);
+                }
+                instructionDiv.appendChild(insList);
+                container.appendChild(instructionDiv);
+
+            });
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    });
+    }; 
+
+    searchParam = () => {
+        var paramString = window.location;
+        var searchParams = new URLSearchParams(paramString);
+        var id = searchParams.get("search");
+        id = id.toString();
+       id = id.substring(4,id.length);
+        if(!id) {
+            //give them something american
+            getRecipeList("American");
+        }
+        else if(id === "undefined") {
+                //give them something European
+                getRecipeList("European")
+    }
+        else {
+        getRecipe(id);
+        }
+    };
+
+//end of recipe section
+
+// !!!!! MUSIC SECTION !!!!!
+
+var playlistContainerEl = document.querySelector(".music-container");
+var welcomeEl = document.querySelector("#welcome");
+
 // Defines an empty global variable for the Spotify access token
 var token = '';
 
@@ -872,7 +914,7 @@ if (window.location.toString().includes('music.html') || window.location.hash > 
 
 // Homepage Flag
 var displayFlag = function() {
-    var searchTerm = $('.search-form input').val();
+    var searchTerm = searchInfo;
     localStorage.setItem('searchTerm', searchTerm);
     var formattedCountry = searchTerm.toLowerCase().split(" ");
 
