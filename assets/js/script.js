@@ -693,7 +693,7 @@ $("#recipe-button").on("click", function () {
   window.location = "recipes.html?id=" + id;
 });
 //end recipe card section
-$("#recipies").on("click", function() {
+$("#recipes").on("click", function() {
     var id = localStorage.getItem("cuisineID");
     window.location = "recipes.html?id=" + id;
 })
