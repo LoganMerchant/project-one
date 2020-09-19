@@ -10,7 +10,7 @@ $(button).on("click", function (event) {
 
   searchInfo = $(".form-control").val();
   $("form-control").empty();
-  console.log(searchInfo);
+//   console.log(searchInfo);
   // make sure to enter a valid search item
   if (searchInfo === "") {
     //alert("input a country please");
@@ -56,9 +56,11 @@ function getNews() {
             data.response.docs[0]?.multimedia[0]?.legacy?.xlarge
         );
         // newsImg.appendChild(pictureDisplay);
+        
 
         pictureDisplay.setAttribute("width", 130);
       }
+    //   console.log(newsImg)
 
       //displaying the items from NYT
       $("#news-img").html("");
@@ -66,7 +68,7 @@ function getNews() {
       $("#output-h2").html("");
       $("#nyt-link").html("");
 
-      // $("#news-img").append(newsImg);
+      $("#news-img").append(newsImg);
       newsImg.appendChild(pictureDisplay);
       $("#output-h1").append(headline);
       $("#output-h2").append(firstPara);
