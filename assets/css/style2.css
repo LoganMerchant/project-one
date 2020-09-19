@@ -30,6 +30,11 @@ body {
 	letter-spacing: 10px;
 }
 
+footer {
+    text-align: center;
+    top: 20px;
+}
+
 @-webkit-keyframes gradientBG {
 	0% {
 		background-position: 0% 50%;
