@@ -110,6 +110,38 @@ function wikiInfo() {
     });
 }
 
+
+//Country Image section
+var countryImage = document.querySelector("#country-image");
+
+getCountryImage = () => {
+    var searchText = $("#country").val();
+    searchText = searchText.toLowerCase();
+    fetch("https://bing-image-search1.p.rapidapi.com/images/search?q=" + searchText, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "bing-image-search1.p.rapidapi.com",
+		"x-rapidapi-key": "79e10edf99msh072ae77a6cce95cp11389ejsn0ed4bd32fa6a"
+	}
+}).then(response => {
+    if(response.ok) {
+        response.json().then(function(data) {
+            //get the number of results
+            console.log(data);
+            var image = data.value[0].contentUrl;
+            var img = document.createElement("img");
+            img.setAttribute("class", "country-image");
+            img.setAttribute("id", "ctryImg")
+            img.setAttribute("src", image);
+            img.setAttribute("height", "240px");
+            countryImage.appendChild(img);
+        })
+    }
+})
+.catch(err => {
+	console.log(err);
+});
+}
 //Recipe section
 //Recipe Card Section
 
@@ -299,6 +331,11 @@ var cuisine;
 var id;
 //on click on recipe, go to recipe.html
 $("#button-addon2").on("click", function () {
+//clear out country-image incase there's something already there
+var img = document.querySelector("#ctryImg");
+if(img) {
+img.remove();
+}
   //clear out card in case there's already something there
   var frontCard = document.querySelector("#recipe-front");
   frontCard.innerHTML = "";
@@ -309,10 +346,11 @@ $("#button-addon2").on("click", function () {
       cuisine = value;
     }
   }
+  getCountryImage();
   getRecipeImage(cuisine);
 });
 //display an image on the front of the card
-
+//also, display country image
 getRecipeImage = (cuisine) => {
   fetch(
     "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?&cuisine=" +
