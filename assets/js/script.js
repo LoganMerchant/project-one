@@ -975,7 +975,7 @@ var tokenCheck = function () {
     token = "denied";
     sessionStorage.setItem("token", token);
   } else if (savedToken === "denied") {
-    return welcomeEl.innerHTML = "In order to display playlists, you must authorize our application." + 
+    return welcomeEl.innerHTML = "In order to display playlists, you must authorize our application. <br><br>" + 
     "<button onclick='spotifyUserAuthorization()'>Click Here to Authorize</button>";
 } else {
     // Set the global var of `token` to match the token in sessionStorage.
