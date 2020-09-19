@@ -671,7 +671,7 @@ getRecipeImage = (cuisine) => {
         //choose a random recipe
         id = data.results[recipeNum].id;
         //add id to the localstorage
-        localStorage.setItem("cuisindID", id);
+        localStorage.setItem("cuisineID", id);
         var img = data.results[recipeNum].image;
         var image = document.createElement("img");
         image.setAttribute("src", img);
