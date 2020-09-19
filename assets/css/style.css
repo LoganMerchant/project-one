@@ -98,6 +98,8 @@ h2 {
 .card-front {
   background-color: darkgray;
   color: salmon;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-back {
