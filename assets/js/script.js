@@ -599,7 +599,7 @@ getCountryImage = () => {
     if(response.ok) {
         response.json().then(function(data) {
             //get the number of results
-            console.log(data);
+            //console.log(data);
             var image = data.value[0].contentUrl;
             var img = document.createElement("img");
             img.setAttribute("class", "country-image");
@@ -622,10 +622,13 @@ var id;
 //on click on recipe, go to recipe.html
 $("#button-addon2").on("click", function () {
 //clear out country-image incase there's something already there
-var img = document.querySelector("#ctryImg");
-if(img) {
-img.remove();
-}
+    var img = document.querySelector("#ctryImg");
+    if(img) {
+        img.remove();
+    }
+    if(localStorage.getItem("cuisineID")) {
+        localStorage.removeItem("cuisineID");
+    }
   //clear out card in case there's already something there
   var frontCard = document.querySelector("#recipe-front");
   frontCard.innerHTML = "";
@@ -665,6 +668,7 @@ getRecipeImage = (cuisine) => {
         }
         //choose a random recipe
         id = data.results[recipeNum].id;
+        localStorage.setItem("cuisindID", id);
         var img = data.results[recipeNum].image;
         var image = document.createElement("img");
         image.setAttribute("src", img);
@@ -686,7 +690,9 @@ $("#recipe-button").on("click", function () {
   window.location = "recipes.html?id=" + id;
 });
 //end recipe card section
-
+$("#recipies").on("click", function() {
+    window.location = "recipies.html?id=" + id;
+})
 //Recipe page section
 
 var container = document.querySelector("#container");
