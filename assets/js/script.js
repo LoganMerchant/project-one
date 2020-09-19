@@ -962,6 +962,9 @@ var tokenCheck = function () {
       "https://loganmerchant.github.io/scratching-your-travel-itch/music.html"
     );
   } else if (location.search.includes("access_denied")) {
+    token = "denied";
+    sessionStorage.setItem("token", token);
+  } else if (savedToken === "denied") {
     welcomeEl.textContent = "In order to display playlists, you must authorize our application.";
   } else {
     // Set the global var of `token` to match the token in sessionStorage.
