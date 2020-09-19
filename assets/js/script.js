@@ -478,7 +478,7 @@ var matchedCodeSearch = function() {
     return false;
 };
 
-if (searchInfo === 'uk' || 'england') {
+if (searchInfo === ('uk' || 'england')) {
     searchInfo = "united kingdom";
 };
 if (searchInfo === 'uae') {
