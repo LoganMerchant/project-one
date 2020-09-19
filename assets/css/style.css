@@ -101,9 +101,10 @@ body {
 
 .recipe-card-title {
 
-    font-size: 15px;
+    font-size: 18px;
     text-align: center;
     margin-top: 5px;
+    text-shadow: 1px 1px black;
 }
 
 
