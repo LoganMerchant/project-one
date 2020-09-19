@@ -694,7 +694,8 @@ $("#recipe-button").on("click", function () {
 });
 //end recipe card section
 $("#recipies").on("click", function() {
-    window.location = "recipies.html?id=" + id;
+    var id = localStorage.getItem("cuisineID");
+    window.location = "recipes.html?id=" + id;
 })
 //Recipe page section
 
