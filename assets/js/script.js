@@ -771,7 +771,7 @@ var getCountryCode = function(searchedCountry) {
 var spotifyUserAuthorization = function() {
     authorizeUri = 'https://accounts.spotify.com/authorize?client_id=c3f150a666754143adc77d0704da8ebf&response_type=token' +
     // !!!! THIS URI REDIRECT NEEDS TO CHANGE TO THE DEPLOYED APPLICATION !!!!
-    '&redirect_uri=https://loganmerchant.github.io/password-generator/';
+    '&redirect_uri=https://loganmerchant.github.io/scratching-your-travel-itch/';
     location.replace(authorizeUri);
 };
 
@@ -853,6 +853,7 @@ var tokenCheck = function() {
         sessionStorage.setItem("token", receivedToken);
         // Set the global var of `token` to match the isolated token.
         token = receivedToken;
+        window.location.replace('https://loganmerchant.github.io/scratching-your-travel-itch/music.html');
     } else {
         // Set the global var of `token` to match the token in sessionStorage.
         token = savedToken;
@@ -862,7 +863,7 @@ var tokenCheck = function() {
     getCountryCode(searchedCountry);
 };
 
-if (window.location.toString().includes('music.html')) {
+if (window.location.toString().includes('music.html') || window.location.hash > 0) {
     tokenCheck();
 };
 
