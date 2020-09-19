@@ -39,7 +39,9 @@ function getNews() {
       //getting the info from NYT
       console.log(data);
       var newsGif = document.querySelector("#news-gif");
+	if(newsGif) {
       newsGif.remove();
+	}
       var wikiGif = document.querySelector('#wiki-gif');
       wikiGif.remove();
       var newsImg = document.querySelector("#news-img");
