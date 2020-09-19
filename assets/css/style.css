@@ -127,6 +127,7 @@ h2 {
 .flag-and-image {
     display: inline-flex;
     align-content: space-between;
+  margin-top: 20px;
 }
 
 .country-image {
