@@ -87,6 +87,7 @@ const cuisines = {
     "australia" : "British",
     "new zealand" : "British",
     "nigeria" : "African",
+    "mauritania" : "African",
     "angola" : "African",
     "ethiopia" : "African",
     "tanzania" : "African",
@@ -638,8 +639,16 @@ $("#button-addon2").on("click", function () {
     if(img) {
         img.remove();
     }
+    else {
+      //don't worry about it
+      return false;
+    }
     if(localStorage.getItem("cuisineID")) {
         localStorage.removeItem("cuisineID");
+    }
+    else {
+      //don't worry about it
+      return false;
     }
   //clear out card in case there's already something there
   var frontCard = document.querySelector("#recipe-front");
@@ -833,7 +842,13 @@ searchParam = () => {
   } else if (id === "undefined") {
     //give them something European
     getRecipeList("European");
-  } else {
+  }
+  else if(id === "null") {
+    //give them some bbq
+    getRecipeList("BBQ");
+  }
+  else {
+    //do what we want to
     getRecipe(id);
   }
 };
