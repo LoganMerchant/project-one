@@ -615,7 +615,8 @@ getCountryImage = () => {
 	    //if the first result is a map, move on to the next image
 	    //if their request isn't in the list, don't get an image--keep things safe
 	    if(Object.keys(cuisines).includes(searchText)){
-            if(data.queryExpansions[0].displayText === "Map") {
+            var text = data.value[0].contentUrl;
+            if(data.queryExpansions[0].displayText.includes("Flag")|| text.includes("Flag")) {
                 var image = data.value[1].contentUrl;
             }
             else{
