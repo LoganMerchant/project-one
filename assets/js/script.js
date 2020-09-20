@@ -640,16 +640,8 @@ $("#button-addon2").on("click", function () {
     if(img) {
         img.remove();
     }
-    else {
-      //don't worry about it
-      return false;
-    }
     if(localStorage.getItem("cuisineID")) {
         localStorage.removeItem("cuisineID");
-    }
-    else {
-      //don't worry about it
-      return false;
     }
   //clear out card in case there's already something there
   var frontCard = document.querySelector("#recipe-front");
