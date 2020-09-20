@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Squiggle Brackets</title>
+    <title>Scratching Your Travel Itch</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -44,8 +44,8 @@
             <a href="./index.html"><span class="mif-home icon"></span>Home</a>
           </li>
           <li class="divider"></li>
-          <li>
-            <a href="./recipes.html"
+          <li id = "recipes">
+            <a href="#"
               ><span class="mif-spoon-fork icon"></span>Recipes</a
             >
           </li>
@@ -80,15 +80,15 @@
             class="btn btn-outline-light"
             type="button"
             id="button-addon2"
-            onclick="displayFlag()"
           >
             Search!
           </button>
           </div>
         </div>
-
+        <div class = "flag-and-image">
         <div id="country-flag"></div>
-
+        <div id = "country-image" class = "country-image"></div>
+        </div>
         <div class="cards">
           <div class="row">
             <div class="card cell" style="margin-top:1rem;">
@@ -139,7 +139,7 @@
                   <a href="./music.html">
                     <button
                       class="button dark rounded drop-shadow"
-                      onclick="tokenCheck()">
+                      >
                       Music
                     </button>
                   </a>
@@ -181,7 +181,7 @@
           </button>
         </div>
         <div class="modal-body">
-          In order for us to help you travel, we need to have a destination. Please enter a country name.
+          In order for us to help you travel, we need to have a destination. Please enter a valid country name.
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
