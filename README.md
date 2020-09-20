@@ -8,15 +8,16 @@
 * Flagpedia API
 * MediaWiki Api
 * NYTimes API
-* Spoonify API
+* Spoonacular API
 * Spotify API
+* Bing Image Search API
 
 ## Application's Purpose
-Allows a user to find more information about a given country, so that they can experience that culture in a small way, without having to actually travel. If however the user would like to eventually travel to said country, they will be all the more prepared after using this application.
+Allows a user to find more information about a given country, so that they can experience that culture in a small way, without having to actually travel. Allows the user to see an image from the country, read the latest news from The New York Times, and view the Wikipedia page. If they're interested in the national cuisine, the application displays a recipe. If the user would like to eventually travel to said country, they will be all the more prepared after using this application.
 
 ## Development Process
 The collaborators on this project each took on their own role and they are as follows:
-* Jani Muhlestein - Spoonify API
+* Jani Muhlestein - Spoonacular & Bing Image Search APIs
 * Jeremy Cornwall - MediaWiki & NYTimes APIs
 * Laurie Graff - Styling
 * Logan Merchant - Spotify API & Flagpedia API
