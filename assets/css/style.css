@@ -285,3 +285,44 @@ footer {
         display: block;
     }
 }
+
+@media only screen and (min-width: 600px) {
+    .row {
+        display: block;
+    }
+    .container h1, h2 {
+        font-size: 40px;
+    }
+
+    .flag-and-image img{
+        height: 150px;        
+    }
+
+    .recipe-img {
+        max-height: 150px;
+        max-width: 150px;
+    }
+
+    .recipe-div {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .flag-and-image img {
+        height: 200px;
+    }
+
+    .recipe-img {
+        max-height: 200px;
+        max-width: 200px;
+    }
+
+    .recipe-div {
+        display: block;
+    }
+
+    .container h1, h2 {
+        font-size: 60px;
+    }
+}
