@@ -36,7 +36,7 @@ const cuisines = {
      "illinois" : "American",
     "korea" : "Korean",
     "greece" : "Greek",
-    "brasil" : "Latin American",
+    "brazil" : "Latin American",
     "peru" : "Latin American",
     "chile" : "Latin American",
     "south africa" : "African",
@@ -608,6 +608,8 @@ getCountryImage = () => {
             //get the number of results
             //console.log(data);
 	    //if the first result is a map, move on to the next image
+	    //if their request isn't in the list, don't get an image--keep things safe
+	    if(Object.keys(cuisines).includes(searchText)){
             if(data.queryExpansions[0].displayText === "Map") {
                 var image = data.value[1].contentUrl;
             }
@@ -620,6 +622,10 @@ getCountryImage = () => {
             img.setAttribute("src", image);
             img.setAttribute("height", "240px");
             countryImage.appendChild(img);
+          }
+          else {
+            console.log("not a country");
+          }
         })
     }
 })
