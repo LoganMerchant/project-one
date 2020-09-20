@@ -483,14 +483,14 @@ var matchedCodeSearch = function() {
     };
     return false;
 };
-console.log(searchInfo);
+// console.log(searchInfo);
 if (searchInfo === 'uk' || searchInfo === 'england') {
     searchInfo = "united kingdom";
 };
 if (searchInfo === 'uae') {
     searchInfo = "united arab emirates";
 };
-console.log(searchInfo);
+// console.log(searchInfo);
 
   if (searchInfo === "" || (matchedCuisineSearch() === false && matchedCodeSearch() === false)) {
     //alert("input a country please");
