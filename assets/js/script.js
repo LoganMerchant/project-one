@@ -605,7 +605,13 @@ getCountryImage = () => {
         response.json().then(function(data) {
             //get the number of results
             //console.log(data);
+	    //if the first result is a map, move on to the next image
+            if(data.queryExpansions[0].displayText === "Map") {
+                var image = data.value[1].contentUrl;
+            }
+            else{
             var image = data.value[0].contentUrl;
+            }
             var img = document.createElement("img");
             img.setAttribute("class", "country-image");
             img.setAttribute("id", "ctryImg")
