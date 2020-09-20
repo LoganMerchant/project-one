@@ -181,11 +181,11 @@ const cuisines = {
     "armenia" : "Eastern European",
     "bahrain" : "Middle Eastern",
     "brunei" : "Middle Eastern",
+     "senegal" : "African",
     "taiwan" : "Chinese",
     "hong kong" : "Chinese",
     "macao" : "Chinese",
     "bali" : "Chinese",
-    "senegal" : "African",
      "mauritania" : "African",
     "palau" : "Asian"
 };
