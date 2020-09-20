@@ -186,7 +186,8 @@ const cuisines = {
     "macao" : "Chinese",
     "bali" : "Chinese",
     "senegal" : "African",
-     "mauritania" : "African"
+     "mauritania" : "African",
+    "palau" : "Asian"
 };
 var countryCodesObj = {
     "BD": "Bangladesh",
