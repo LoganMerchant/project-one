@@ -271,4 +271,17 @@ footer {
     .container h1, h2 {
         font-size: 40px;
     }
+  
+   .flag-and-image img{
+        height: 150px;        
+    }
+
+    .recipe-img {
+        max-height: 150px;
+        max-width: 150px;
+    }
+
+    .recipe-div {
+        display: block;
+    }
 }
