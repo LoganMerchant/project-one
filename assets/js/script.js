@@ -31,6 +31,9 @@ const cuisines = {
     "louisiana" : "Cajun",
     "south carolina" : "Southern",
     "north carolina" : "Southern",
+     "virginia" : "Southern",
+     "west virgninia": "BBQ",
+     "illinois" : "American",
     "korea" : "Korean",
     "greece" : "Greek",
     "brasil" : "Latin American",
@@ -182,6 +185,7 @@ const cuisines = {
     "macao" : "Chinese",
     "bali" : "Chinese",
     "senegal" : "African"
+     "mauritania" : "African"
 };
 var countryCodesObj = {
     "BD": "Bangladesh",
