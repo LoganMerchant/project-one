@@ -185,7 +185,7 @@ const cuisines = {
     "hong kong" : "Chinese",
     "macao" : "Chinese",
     "bali" : "Chinese",
-    "senegal" : "African"
+    "senegal" : "African",
      "mauritania" : "African"
 };
 var countryCodesObj = {
