@@ -504,7 +504,7 @@ if (searchInfo === 'uae') {
     wikiInfo(searchInfo);
   }
 });
-function getNews() {
+function getNews(searchInfo) {
   fetch(
     `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInfo}&api-key=${key}`
   )
@@ -517,10 +517,14 @@ function getNews() {
     .then(function (data) {
       //getting the info from NYT
       console.log(data);
-      var newsGif = document.querySelector("#news-gif");
+      var newsGif = document.querySelector('#news-gif');
+      if(newsGif !== null){
       newsGif.remove();
+      } 
       var wikiGif = document.querySelector('#wiki-gif');
+      if(wikiGif !== null){
       wikiGif.remove();
+      }
       var newsImg = document.querySelector("#news-img");
       var pictureDisplay = document.createElement("img");
       var headline = data.response.docs[0]?.headline?.main;
@@ -544,6 +548,7 @@ function getNews() {
     //   console.log(newsImg)
 
       //displaying the items from NYT
+      // $("#news-gif").html("");
       $("#news-img").html("");
       $("#output-h1").html("");
       $("#output-h2").html("");
