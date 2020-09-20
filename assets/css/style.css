@@ -124,6 +124,11 @@ h2 {
   transform: rotateY(180deg);
 }
 
+.row {
+   margin: 20px;
+    column-gap: 20px;
+}
+
 .flag-and-image {
     display: inline-flex;
     align-content: space-between;
