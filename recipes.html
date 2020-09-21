@@ -1,0 +1,55 @@
+<!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. © Copyright The Dangling Blobs-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css">
+    <!-- bootstrap just in case! -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body onload = "searchParam()">
+    <header>
+        <div class="h-100 p-ab">
+            <button class="button square pos-absolute pos-top-right"
+                    id="sidebar-toggle-2">
+                <span class="mif-menu"></span>
+            </button>
+            <div class="recipe-header">
+                <h1 id="title"></h1>
+               </div>
+    </header>
+
+   <container class = "recipe-container" id="container">
+    <div class = "recipe-description"></div>
+   </container>
+    
+
+    <aside class="sidebar pos-absolute z-2" data-role="sidebar" data-toggle="#sidebar-toggle-2">
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><span class="mif-home icon"></span>Home</a></li>
+            <li class="divider"></li>
+            <li id = "recipes"><a href="#"><span class="mif-spoon-fork icon"></span>Recipes</a></li>
+            <li><a href="music.html"><span class="mif-music icon"></span>Music</a></li>
+        </ul>
+    </aside>
+   
+    </div>
+    <footer class="copyright">
+        <p class="copy-info">&#169 Copyright The Dangling Blobs</p>
+    </footer>
+    
+   
+    <div id="response-header"></div>
+    <div id="response-container"></div>
+    <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+    
+</body>
+</html>

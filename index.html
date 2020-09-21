@@ -1,0 +1,202 @@
+<!-- Code ideas and designs created by Jani Muhlestein, Logan Merchant, Laurie Graff and Jeremy Cornwall. © Copyright The Dangling Blobs-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scratching Your Travel Itch</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css"
+    />
+    <!-- bootstrap just in case! -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="h-100 p-ab">
+        <button
+          class="button square pos-absolute pos-top-right"
+          id="sidebar-toggle-2"
+        >
+          <span class="mif-menu"></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <aside
+        class="sidebar pos-absolute z-2"
+        data-role="sidebar"
+        data-toggle="#sidebar-toggle-2"
+      >
+        <ul class="sidebar-menu">
+          <li>
+            <a href="./index.html"><span class="mif-home icon"></span>Home</a>
+          </li>
+          <li class="divider"></li>
+          <li id = "recipes">
+            <a href="#"
+              ><span class="mif-spoon-fork icon"></span>Recipes</a
+            >
+          </li>
+          
+          <li>
+            <a href="./music.html"><span class="mif-music icon"></span>Music</a>
+          </li>
+          
+        </ul>
+      </aside>
+
+      <div class="container">
+        <h1>Travel The World</h1>
+        <h2>Without Leaving Home</h2>
+
+        <div class="search-container">
+          <h3>What country would you like to visit?</h3>
+          <!--<select name="genre-selector" id="rating">-->
+
+          <div class="search-form input-group col-6">
+            <input
+              type="text"
+              class="form-control"
+              id="country"
+              placeholder="Search Countries"
+              aria-label="Query Search"
+              aria-describedby="button-addon2"
+            />
+            <div class="input-group-append">
+          
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            id="button-addon2"
+          >
+            Search!
+          </button>
+          </div>
+        </div>
+        <div class = "flag-and-image">
+        <div id="country-flag"></div>
+        <div id = "country-image" class = "country-image"></div>
+        </div>
+        <div class="cards">
+          <div class="row">
+            <div class="card cell" style="margin-top:1rem;">
+                <div class="card-inner">
+                  <div class="card-front" id="recipe-front">
+                  <img src="./assets/images/piper-haywood_nan-nan-recipes.gif" width = "250px"/>
+                  </div>
+                  <div class="card-back">
+                    <a href="#">
+                      <button
+                        class="button dark rounded drop-shadow"
+                        id="recipe-button">
+                        Recipes
+                      </button>
+                    </a>
+                  </div>
+                </div>
+            </div>
+            
+
+            <div class="card cell">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img id="news-gif" src="./assets/images/news.gif"
+                  width="200px"/>
+                  <div id="news-img"></div>
+                  <h1 id="output-h1"></h1>
+                  <h2 id="output-h2"></h2>
+                </div>
+                <div class="card-back">
+                  <a href="./news.html">
+                    <button class="button dark rounded drop-shadow">
+                      <a id="nyt-link"></a>
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card cell">
+              <div class="card-inner">
+                <div class="card-front">
+                  <div class="img-container">
+                    <img src="./assets/images/music.gif" />
+                  </div>
+                </div>
+                <div class="card-back">
+                  <a href="./music.html">
+                    <button
+                      class="button dark rounded drop-shadow"
+                      >
+                      Music
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card cell">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img id="wiki-gif" src="./assets/images/Newtons_cradle_animation_book_2.gif" width="150px" height="200px" alt="centered image"/>
+                  <h1 id="wiki-h1"></h1>
+                  <h2 id="wiki-h2"></h2>
+                </div>
+                <div class="card-back">
+                  <a href="./wikipedia.html">
+                    <button class="button dark rounded drop-shadow">
+                      <a id="wiki-link"></a>
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </main>
+<!--modal for if they don't enter a country-->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="no-country" tabindex="-1" role="dialog" aria-labelledby="no-countryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="no-countryModalLabel">Enter country please!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          In order for us to help you travel, we need to have a destination. Please enter a valid country name.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div id="response-header"></div>
+    <div id="response-container"></div>
+    <footer class="copyright">
+      <p class="copy-info">&#169 Copyright The Dangling Blobs</p>
+  </footer>
+    <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
