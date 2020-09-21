@@ -28,4 +28,4 @@ The individuals working with APIs worked to get the `fetch` calls working while 
 [Scratching Your Travel Itch](https://loganmerchant.github.io/scratching-your-travel-itch/)
 
 ## Demo of the Application
-![...](...)
+![Scratching Your Travel Itch Demo](./assets/images/scratching-your-travel-itch.gif)
