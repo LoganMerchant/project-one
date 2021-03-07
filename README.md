@@ -24,11 +24,11 @@ To install a copy of this repository, simply clone it by running one of these tw
 
 **HTTPS**
 
-`git clone https://github.com/LoganMerchant/super-duper-portfolio.git`
+`git clone https://github.com/LoganMerchant/scratching-your-travel-itch.git`
 
 **SSH**
 
-`git@github.com:LoganMerchant/super-duper-portfolio.git`
+`git@github.com:LoganMerchant/scratching-your-travel-itch.git`
 
 ## Development Process
 
